@@ -1,0 +1,6 @@
+node_modules/
+package-lock.json
+progress.db
+progress.db-shm
+progress.db-wal
+server.log
