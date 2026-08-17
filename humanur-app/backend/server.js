@@ -44,6 +44,34 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.type('html').send(`<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Hümanur Backend API</title>
+<style>
+  body{ font-family: system-ui, sans-serif; max-width:640px; margin:60px auto; padding:0 20px; color:#22312D; background:#FBF3E7; }
+  h1{ color:#0F5C56; }
+  code{ background:#F1E4CE; padding:2px 6px; border-radius:4px; }
+  ul{ line-height:1.8; }
+  .ok{ color:#0F5C56; font-weight:bold; }
+</style>
+</head>
+<body>
+  <h1>🌙 Hümanur Backend API</h1>
+  <p class="ok">✅ Sunucu çalışıyor.</p>
+  <p>Bu, Hümanur'un Kur'an Yolculuğu uygulamasının arka uç (backend) servisidir. Doğrudan tarayıcıdan görüntülemek için değil, uygulamanın kendisi tarafından kullanılmak üzere tasarlanmıştır.</p>
+  <p><strong>Kullanılabilir uç noktalar (endpoints):</strong></p>
+  <ul>
+    <li><code>GET /api/health</code> — sağlık kontrolü</li>
+    <li><code>GET /api/progress/:userId</code> — ilerlemeyi getir</li>
+    <li><code>PUT /api/progress/:userId</code> — ilerlemeyi kaydet</li>
+  </ul>
+</body>
+</html>`);
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, time: new Date().toISOString() });
 });
@@ -84,6 +112,15 @@ app.put('/api/progress/:userId', (req, res) => {
     ON CONFLICT(user_id) DO UPDATE SET state = excluded.state, updated_at = excluded.updated_at
   `).run(userId, json, now);
   res.json({ ok: true, updated_at: now });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ error: 'Bulunamadı.', path: req.path });
+});
+
+app.use((err, req, res, next) => {
+  console.error('Sunucu hatası:', err);
+  res.status(500).json({ error: 'Sunucuda beklenmeyen bir hata oluştu.' });
 });
 
 app.listen(PORT, () => {
