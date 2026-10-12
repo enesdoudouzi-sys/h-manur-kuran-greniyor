@@ -350,7 +350,8 @@ function showToast(msg){
 let lastMilestone = 0;
 function currentPct(){
   const {total,max} = totalStars();
-  return Math.round((total/max)*100);
+  // floor, so 100% (and its celebration) only appears when everything is done
+  return Math.floor((total/max)*100);
 }
 function checkMilestone(pct){
   const steps = [25,50,75,100];
@@ -1052,10 +1053,11 @@ function updateStories(total){
 function updateLale(){
   const el = document.getElementById('laleText');
   if(!el) return;
-  const {l, s, stage1, total} = totalStars();
+  const {l, s, stage1, total, max} = totalStars();
   const toNext = STORY_STEP - (total % STORY_STEP);
   let msg;
   if(total === 0) msg = 'Merhaba Hümanur! Ben Lale. 🌷 Hadi harf kartlarıyla başlayalım!';
+  else if(total === max) msg = 'Maşallah Hümanur! Bütün yolculuğu tamamladın! Seninle gurur duyuyorum. 🏆🌷';
   else if(l/LETTERS.length < 0.3) msg = 'Harika başladın! Birkaç harf daha öğrenirsen Hece Ustası açılacak.';
   else if(s/SYLLABLES.length < 0.3) msg = 'Şimdi hecelere geçme zamanı! بَ بِ بُ — ba, bi, bu 🎵';
   else if(storiesUnlocked < STORIES.length) msg = 'Yeni bir Osmanlı hikâyesine '+toNext+' yıldız kaldı! 📜';
