@@ -36,9 +36,53 @@
       <div class="bar-bg"><div class="bar-fill" id="overallBar"></div></div>
     </div>
   </div>
+  <svg class="skyline" viewBox="0 0 400 90" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g fill="#0A2C29">
+      <!-- distant small mosque, left -->
+      <path d="M18 90 V72 Q18 60 32 58 Q46 60 46 72 V90 Z"/>
+      <rect x="8" y="44" width="4" height="46"/><path d="M8 44 L10 34 L12 44 Z"/><rect x="6.5" y="56" width="7" height="2"/>
+      <!-- distant small mosque, right -->
+      <path d="M354 90 V72 Q354 60 368 58 Q382 60 382 72 V90 Z"/>
+      <rect x="388" y="44" width="4" height="46"/><path d="M388 44 L390 34 L392 44 Z"/><rect x="386.5" y="56" width="7" height="2"/>
+      <!-- main mosque -->
+      <rect x="112" y="66" width="176" height="24"/>
+      <path d="M122 70 Q122 50 150 48 L150 70 Z"/>
+      <path d="M278 70 Q278 50 250 48 L250 70 Z"/>
+      <path d="M148 68 Q148 30 200 28 Q252 30 252 68 Z"/>
+      <rect x="199" y="16" width="2" height="13"/>
+      <path d="M200 8 A5 5 0 1 0 205 15 A4 4 0 1 1 200 8 Z" fill="#F1CE84"/>
+      <path d="M130 68 Q130 60 138 59 Q146 60 146 68 Z"/><path d="M254 68 Q254 60 262 59 Q270 60 270 68 Z"/>
+      <!-- minarets -->
+      <rect x="94" y="22" width="7" height="68"/><path d="M94 22 L97.5 4 L101 22 Z"/><rect x="91.5" y="40" width="12" height="3"/><rect x="91.5" y="56" width="12" height="3"/>
+      <rect x="299" y="22" width="7" height="68"/><path d="M299 22 L302.5 4 L306 22 Z"/><rect x="296.5" y="40" width="12" height="3"/><rect x="296.5" y="56" width="12" height="3"/>
+      <rect x="66" y="38" width="5" height="52"/><path d="M66 38 L68.5 24 L71 38 Z"/><rect x="64" y="52" width="9" height="2"/>
+      <rect x="329" y="38" width="5" height="52"/><path d="M329 38 L331.5 24 L334 38 Z"/><rect x="327" y="52" width="9" height="2"/>
+    </g>
+    <!-- lit windows -->
+    <g fill="#F1CE84" opacity=".55">
+      <path d="M170 90 V80 Q170 75 174 75 Q178 75 178 80 V90 Z"/><path d="M196 90 V78 Q196 72 200 72 Q204 72 204 78 V90 Z"/><path d="M222 90 V80 Q222 75 226 75 Q230 75 230 80 V90 Z"/>
+    </g>
+  </svg>
 </header>
+<div class="cini-band" aria-hidden="true"></div>
 
 <main>
+
+  <div class="lale-guide" id="laleGuide">
+    <div class="lale-avatar" aria-hidden="true">
+      <svg viewBox="0 0 60 70" width="54" height="63">
+        <path d="M30 40 V66" stroke="#2A9D8F" stroke-width="3" fill="none"/>
+        <path d="M30 60 Q16 58 12 44 Q24 46 30 56 Z" fill="#2A9D8F"/>
+        <path d="M30 62 Q44 58 48 46 Q36 48 30 58 Z" fill="#2A9D8F"/>
+        <path d="M30 4 Q22 10 18 6 Q14 22 18 34 Q24 42 30 42 Q36 42 42 34 Q46 22 42 6 Q38 10 30 4 Z" fill="#D1495B"/>
+        <path d="M30 6 Q26 18 30 40 Q34 18 30 6 Z" fill="#E87A8A"/>
+        <circle cx="24.5" cy="24" r="2" fill="#22312D"/><circle cx="35.5" cy="24" r="2" fill="#22312D"/>
+        <path d="M25 30 Q30 34 35 30" stroke="#22312D" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <circle cx="21" cy="29" r="2.2" fill="#F6A5B0" opacity=".8"/><circle cx="39" cy="29" r="2.2" fill="#F6A5B0" opacity=".8"/>
+      </svg>
+    </div>
+    <div class="lale-bubble" id="laleText"></div>
+  </div>
 
   <section id="mapView" class="journey">
     <div class="path-line"></div>
@@ -89,6 +133,15 @@
         <div class="stage-stars" id="stars-pages">0 / 10 ★</div>
       </div>
       <div class="lock-icon" id="lock-pages">🔒</div>
+    </div>
+
+    <div class="stage-node story-node" data-stage="stories" onclick="openStage('stories')" onkeydown="onStageKey(event,'stories')" role="button" tabindex="0">
+      <div class="stage-badge">📜</div>
+      <div class="stage-body">
+        <h3>Osmanlı Hikâyeleri</h3>
+        <p>Yıldız topladıkça yeni bilgi kartları açılır</p>
+        <div class="stage-stars" id="stars-stories"></div>
+      </div>
     </div>
 
     <div class="info-box">
@@ -205,19 +258,29 @@
     <div id="surasWrap"></div>
   </section>
 
+  <!-- OTTOMAN STORIES -->
+  <section class="panel" id="panel-stories">
+    <button class="back-btn" onclick="closeStage()">← Yolculuğa dön</button>
+    <div class="panel-header">
+      <h2>Osmanlı Hikâyeleri</h2>
+      <p>Topladığın yıldızlarla yeni bilgi kartları açılır. Bir karta dokunarak oku!</p>
+    </div>
+    <div class="stories-grid" id="storiesGrid"></div>
+  </section>
+
   <!-- STAGE 5: PAGES -->
   <section class="panel" id="panel-pages">
     <button class="back-btn" onclick="closeStage()">← Yolculuğa dön</button>
     <div class="panel-header">
       <h2>Okuma Kahramanı</h2>
-      <p>Her okuduğun sayfa için bir çıkartma kazanılır.</p>
+      <p>Her okuduğun sayfa için bir lale çıkartması kazanılır. 🌷</p>
     </div>
     <div class="pages-grid" id="pagesGrid"></div>
   </section>
 
 </main>
 
-<footer>Yolculukta bol keyif, Hümanur! 🌙</footer>
+<footer><div class="footer-tiles" aria-hidden="true"></div>Yolculukta bol keyif, Hümanur! 🌙</footer>
 </div>
 <div class="toast" id="toast"></div>
 <script src="script.js"></script>

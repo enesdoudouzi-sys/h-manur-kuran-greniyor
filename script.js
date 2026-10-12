@@ -195,6 +195,22 @@ const LESSONS = [
     ]}
 ];
 const LESSON_ITEM_COUNT = LESSONS.reduce((n,l)=> n + l.items.length, 0);
+
+// Child-friendly knowledge cards about Ottoman culture. Card i unlocks at
+// i * STORY_STEP stars, so the first one is open right away.
+const STORY_STEP = 12;
+const STORIES = [
+  { icon:"🏫", title:"Sıbyan Mektebi", text:"Osmanlı'da çocuklar okumayı mahalledeki küçük okullarda öğrenirdi. Bu okulların adı sıbyan mektebiydi. İlk derste, senin şimdi yaptığın gibi, Elifbe'yi öğrenirlerdi!" },
+  { icon:"🎉", title:"Âmin Alayı", text:"Bir çocuk okula başlarken büyük bir kutlama yapılırdı. Çocuk süslenir, arkadaşları onunla birlikte sokaklarda yürür ve ilahiler okurdu. Hep birlikte \"Âmin!\" diye seslenirlerdi." },
+  { icon:"🌷", title:"Lale", text:"Osmanlılar laleyi çok severdi. Laleyi çinilerde, kumaşlarda ve kitap süslemelerinde görebilirsin. Lale, Osmanlı sanatının en sevilen çiçeğidir." },
+  { icon:"✒️", title:"Hattatlar", text:"Güzel yazı yazan ustalara hattat denir. Hattatlar kamıştan yapılmış kalemlerle yazardı. Bir hattat olmak için yıllarca sabırla çalışmak gerekirdi." },
+  { icon:"📖", title:"İstanbul'da Yazıldı", text:"Eski bir sözde şöyle denir: \"Kur'an Mekke'de indi, Mısır'da okundu, İstanbul'da yazıldı.\" Çünkü İstanbul'daki hattatlar Kur'an'ı çok güzel yazarlardı." },
+  { icon:"🔷", title:"İznik Çinileri", text:"Çiniler; mavi, turkuaz ve kırmızı renklerle süslenmiş parlak karolardır. Sultanahmet Camii'nin içi o kadar çok mavi çiniyle süslüdür ki ona \"Mavi Cami\" da denir." },
+  { icon:"🕌", title:"Mimar Sinan", text:"Mimar Sinan, Osmanlı'nın en ünlü mimarıdır. İstanbul'daki Süleymaniye Camii'ni ve Edirne'deki Selimiye Camii'ni o yaptı. Yüzlerce bina inşa etti!" },
+  { icon:"✨", title:"Mahya", text:"Ramazan ayında iki minarenin arasına iplerle kandiller asılırdı. Bu ışıklar gökyüzünde yazı ya da resim gibi görünürdü. Buna mahya denir ve bu gelenek bugün hâlâ yaşıyor." },
+  { icon:"🎨", title:"Ebru", text:"Ebru, suyun üzerinde yapılan bir resim sanatıdır. Boyalar suya damlatılır, fırçayla çiçekler çizilir ve sonra üstüne kâğıt konur. Her ebru tektir, hiçbiri birbirine benzemez!" },
+  { icon:"👑", title:"Tuğra", text:"Tuğra, Osmanlı padişahlarının süslü imzasıdır. Padişahın adı özel bir şekilde yazılırdı. Tuğrayı paraların ve önemli mektupların üzerinde görebilirsin." }
+];
 const PAGE_COUNT = 10;
 
 const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{} };
@@ -356,6 +372,8 @@ function updateHeader(){
   document.getElementById('moonPct').textContent = pct+'%';
   checkMilestone(pct);
   updateStageCards();
+  updateStories(total);
+  updateLale();
   saveProgress();
 }
 
@@ -395,6 +413,7 @@ function openStage(stage){
     return;
   }
   document.getElementById('mapView').style.display = 'none';
+  document.getElementById('laleGuide').style.display = 'none';
   document.getElementById('panel-'+stage).classList.add('open');
   currentStage = stage;
   window.scrollTo({top:0, behavior:'smooth'});
@@ -403,6 +422,7 @@ function closeStage(){
   stopAudio();
   if(currentStage) document.getElementById('panel-'+currentStage).classList.remove('open');
   document.getElementById('mapView').style.display = 'block';
+  document.getElementById('laleGuide').style.display = '';
   currentStage = null;
 }
 function onStageKey(e, stage){
@@ -453,6 +473,7 @@ function makeQuiz(ids, getItems, onCorrect, label){
     if(choice === item.correct){
       q.locked = true;
       btn.classList.add('correct');
+      celebrate(btn);
       $(ids.feedback).textContent = randomPraise();
       speakArabic(item.say || item.g);
       onCorrect(item);
@@ -553,6 +574,7 @@ function answerLetterQuiz(isCorrect, idx, btn){
   if(isCorrect){
     letterQuizLocked = true;
     btn.classList.add('correct');
+    celebrate(btn);
     feedback.textContent = randomPraise();
     speakArabic(LETTERS[idx].ar);
     if(!state.letters[idx]){
@@ -712,6 +734,7 @@ const tracer = (()=>{
     const {coverage, precision} = score();
     if(coverage >= 0.55 && precision >= 0.7){
       fb.textContent = randomPraise();
+      celebrate(ink);
       speakArabic(LETTERS[index].ar);
       if(!state.trace[index]){ state.trace[index] = true; updateHeader(); }
       document.getElementById('traceName').textContent = LETTERS[index].name + ' ★';
@@ -951,7 +974,7 @@ function buildPages(){
     chip.id = 'page-'+i;
     const isRead = !!state.pages[i];
     if(isRead) chip.classList.add('read');
-    chip.innerHTML = `<div class="n">Sayfa ${i}</div><div class="s">${isRead ? '★' : '☆'}</div>`;
+    chip.innerHTML = `<div class="n">Sayfa ${i}</div><div class="s">${isRead ? '🌷' : '○'}</div>`;
     chip.onclick = ()=> togglePage(i, chip);
     grid.appendChild(chip);
   }
@@ -960,9 +983,85 @@ function togglePage(i, chip){
   const isRead = !!state.pages[i];
   state.pages[i] = !isRead;
   chip.classList.toggle('read', !isRead);
-  chip.querySelector('.s').textContent = !isRead ? '★' : '☆';
+  chip.querySelector('.s').textContent = !isRead ? '🌷' : '○';
+  if(!isRead) celebrate(chip);
   if(!isRead) showToast(randomPraise());
   updateHeader();
+}
+
+// ---------- Celebration ----------
+const BURST = ['🌷','⭐','🌷','✨','🌷','⭐'];
+function celebrate(el){
+  if(!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const r = el.getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height/2;
+  BURST.forEach((ch, i)=>{
+    const s = document.createElement('span');
+    s.className = 'burst';
+    s.textContent = ch;
+    const ang = (Math.PI*2*i)/BURST.length - Math.PI/2;
+    s.style.left = cx+'px';
+    s.style.top = cy+'px';
+    s.style.setProperty('--dx', Math.cos(ang)*70+'px');
+    s.style.setProperty('--dy', Math.sin(ang)*70+'px');
+    document.body.appendChild(s);
+    setTimeout(()=> s.remove(), 900);
+  });
+}
+
+// ---------- Ottoman stories ----------
+let storiesUnlocked = -1;
+function storiesOpenCount(total){
+  return Math.min(STORIES.length, Math.floor(total / STORY_STEP) + 1);
+}
+function buildStories(){
+  const grid = document.getElementById('storiesGrid');
+  grid.innerHTML = '';
+  STORIES.forEach((st, i)=>{
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'story-card';
+    card.id = 'story-'+i;
+    card.onclick = ()=> card.classList.contains('locked') ? showToast('Bu kartı açmak için daha fazla yıldız topla! ⭐') : card.classList.toggle('open');
+    grid.appendChild(card);
+  });
+}
+function updateStories(total){
+  const open = storiesOpenCount(total);
+  if(storiesUnlocked !== -1 && open > storiesUnlocked){
+    showToast('Yeni bir bilgi kartı açıldı: '+STORIES[open-1].title+' 📜');
+  }
+  storiesUnlocked = open;
+  document.getElementById('stars-stories').textContent = open+' / '+STORIES.length+' kart açıldı';
+  STORIES.forEach((st, i)=>{
+    const card = document.getElementById('story-'+i);
+    if(!card) return;
+    const locked = i >= open;
+    const wasLocked = card.classList.contains('locked');
+    if(card.dataset.state === (locked ? 'locked' : 'open')) return;
+    card.dataset.state = locked ? 'locked' : 'open';
+    card.classList.toggle('locked', locked);
+    card.innerHTML = locked
+      ? `<div class="story-icon">🔒</div><div class="story-title">${i*STORY_STEP} yıldızda açılır</div>`
+      : `<div class="story-icon">${st.icon}</div><div class="story-title">${st.title}</div><p class="story-text">${st.text}</p>`;
+    if(wasLocked && !locked) card.classList.add('open');
+  });
+}
+
+// ---------- Lale, the guide ----------
+function updateLale(){
+  const el = document.getElementById('laleText');
+  if(!el) return;
+  const {l, s, stage1, total} = totalStars();
+  const toNext = STORY_STEP - (total % STORY_STEP);
+  let msg;
+  if(total === 0) msg = 'Merhaba Hümanur! Ben Lale. 🌷 Hadi harf kartlarıyla başlayalım!';
+  else if(l/LETTERS.length < 0.3) msg = 'Harika başladın! Birkaç harf daha öğrenirsen Hece Ustası açılacak.';
+  else if(s/SYLLABLES.length < 0.3) msg = 'Şimdi hecelere geçme zamanı! بَ بِ بُ — ba, bi, bu 🎵';
+  else if(storiesUnlocked < STORIES.length) msg = 'Yeni bir Osmanlı hikâyesine '+toNext+' yıldız kaldı! 📜';
+  else if(stage1 < STAGE1_MAX) msg = 'Biliyor muydun? "Çiz" bölümünde harfleri parmağınla yazabilirsin! ✍️';
+  else msg = 'Maşallah Hümanur, çok çalışkansın! Sûrelere devam edelim mi? 📖';
+  el.textContent = msg;
 }
 
 // ---------- Init ----------
@@ -976,6 +1075,7 @@ async function init(){
   formsQuiz.load();
   syllableQuiz.load();
   buildLessons();
+  buildStories();
   buildSuras();
   buildPages();
   updateHeader();

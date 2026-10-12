@@ -328,3 +328,125 @@
   .sura-block{ margin-bottom:.75rem; }
   #traceFeedback{ text-align:center; }
   .lesson-sign{ font-size:2.6rem; color:var(--teal); word-spacing:.4em; }
+
+  /* ===== Ottoman details ===== */
+  :root{
+    --iznik-blue:#1F4E9C;
+    --iznik-turq:#2A9D8F;
+    --iznik-red:#D1495B;
+    --cini-tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='22' viewBox='0 0 36 22'%3E%3Crect width='36' height='22' fill='%23F7F3EA'/%3E%3Cpath d='M18 12 V20' stroke='%232A9D8F' stroke-width='1.4'/%3E%3Cpath d='M18 18 Q12 17 11 12 Q16 13 18 16Z' fill='%232A9D8F'/%3E%3Cpath d='M18 18 Q24 17 25 12 Q20 13 18 16Z' fill='%232A9D8F'/%3E%3Cpath d='M18 2 Q15 4 13.5 3 Q12.5 9 14 11.5 Q16 13 18 13 Q20 13 22 11.5 Q23.5 9 22.5 3 Q21 4 18 2Z' fill='%231F4E9C'/%3E%3Cpath d='M18 3 Q16.6 7 18 12.5 Q19.4 7 18 3Z' fill='%23D1495B'/%3E%3Ccircle cx='3' cy='11' r='1.6' fill='%23D1495B'/%3E%3Ccircle cx='33' cy='11' r='1.6' fill='%23D1495B'/%3E%3C/svg%3E");
+  }
+
+  /* Mosque skyline at the bottom of the header */
+  header{ padding-bottom:0; }
+  header .moon-wrap{ position:relative; z-index:1; }
+  .skyline{ display:block; width:calc(100% + 2.5rem); height:84px; margin:1rem -1.25rem 0; position:relative; z-index:0; }
+  /* Iznik tile band instead of the diagonal stripes */
+  header{ border-bottom:3px solid var(--gold); }
+  header::after{
+    bottom:-25px; height:22px; opacity:1;
+    background-image:var(--cini-tile); background-size:36px 22px; background-repeat:repeat-x;
+    border-bottom:3px solid var(--iznik-blue);
+  }
+  main{ padding-top:2.6rem; }
+
+  /* Lale guide */
+  .lale-guide{ display:flex; align-items:flex-end; gap:8px; margin:0 0 1rem; }
+  .lale-avatar{ flex:none; animation:laleSway 3.2s ease-in-out infinite; transform-origin:50% 100%; }
+  @keyframes laleSway{ 0%,100%{ transform:rotate(-4deg);} 50%{ transform:rotate(4deg);} }
+  .lale-bubble{
+    position:relative; flex:1; background:var(--card); border:2px solid var(--iznik-turq);
+    border-radius:16px 16px 16px 4px; padding:.6rem .85rem; font-weight:700; font-size:.92rem; color:var(--ink);
+    box-shadow:0 3px 0 rgba(42,157,143,.25);
+  }
+  .lale-bubble::before{
+    content:""; position:absolute; left:-9px; bottom:8px; width:14px; height:14px;
+    background:var(--card); border-left:2px solid var(--iznik-turq); border-bottom:2px solid var(--iznik-turq);
+    transform:rotate(45deg);
+  }
+
+  /* Mihrab-arch stage badges with a gold inner frame */
+  .stage-badge{
+    border-radius:30px 30px 12px 12px;
+    box-shadow:inset 0 0 0 2px #fff, inset 0 0 0 3.5px var(--gold-light);
+    position:relative;
+  }
+  .stage-badge::before{
+    content:""; position:absolute; top:-7px; left:50%; width:10px; height:10px; margin-left:-5px;
+    background:var(--gold); clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+  .stage-node.active .stage-badge{ box-shadow:inset 0 0 0 2px var(--teal), inset 0 0 0 3.5px var(--gold); }
+  .story-node{ border-left-color:var(--iznik-blue); background:linear-gradient(90deg, #F2F6FC, var(--card) 60%); }
+  .story-node .stage-badge{ background:#E3ECF8; }
+  .story-node .stage-stars{ color:var(--iznik-blue); }
+
+  /* Ornamental divider under panel titles */
+  .panel-header::after{
+    content:""; display:block; height:22px; margin-top:.6rem;
+    background:
+      var(--cini-tile) center/36px 22px no-repeat,
+      linear-gradient(var(--gold-light), var(--gold-light)) left center/calc(50% - 26px) 2px no-repeat,
+      linear-gradient(var(--gold-light), var(--gold-light)) right center/calc(50% - 26px) 2px no-repeat;
+  }
+
+  /* Tezhip (illumination) frame around each âyet */
+  .ayah{
+    position:relative;
+    border:1.5px solid var(--gold-light);
+    box-shadow:inset 0 0 0 4px var(--card), inset 0 0 0 5px rgba(204,154,60,.45);
+    background:
+      radial-gradient(circle at 8px 8px, var(--gold) 2.5px, transparent 3px),
+      radial-gradient(circle at calc(100% - 8px) 8px, var(--gold) 2.5px, transparent 3px),
+      radial-gradient(circle at 8px calc(100% - 8px), var(--gold) 2.5px, transparent 3px),
+      radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), var(--gold) 2.5px, transparent 3px),
+      var(--card);
+  }
+  .sura-title{ border-left:4px solid var(--iznik-blue); }
+  .lesson-card, .quiz-box{ box-shadow:inset 0 0 0 4px var(--card), inset 0 0 0 5px rgba(42,157,143,.25); }
+
+  /* Letter cards: tiny tile corner */
+  .letter-front::before{
+    content:""; position:absolute; left:6px; top:6px; width:12px; height:12px;
+    background:var(--iznik-turq); opacity:.35; clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+
+  /* Stories */
+  .stories-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .story-card{
+    text-align:center; cursor:pointer; font-family:'Baloo 2'; color:var(--ink);
+    background:var(--card); border:2px solid var(--gold-light); border-radius:26px 26px 12px 12px;
+    padding:.9rem .6rem .8rem; box-shadow:inset 0 0 0 4px var(--card), inset 0 0 0 5px rgba(31,78,156,.25);
+    transition:transform .15s ease;
+  }
+  .story-card:active{ transform:scale(.97); }
+  .story-card.open{ grid-column:1 / -1; border-color:var(--iznik-blue); background:linear-gradient(180deg,#F2F6FC,var(--card)); }
+  .story-card.locked{ opacity:.6; border-style:dashed; cursor:default; }
+  .story-icon{ font-size:2rem; line-height:1.3; }
+  .story-title{ font-weight:800; font-size:.95rem; color:var(--iznik-blue); }
+  .story-card.locked .story-title{ color:var(--ink-soft); font-size:.8rem; }
+  .story-text{ display:none; font-size:.9rem; line-height:1.55; margin:.5rem 0 0; color:var(--ink); text-align:left; }
+  .story-card.open .story-text{ display:block; }
+
+  /* Pages: tulip stickers */
+  .page-chip .s{ font-size:1.4rem; }
+  .page-chip.read{ background:#FDEFF1; border-color:var(--iznik-red); }
+
+  /* Celebration burst */
+  .burst{
+    position:fixed; z-index:70; pointer-events:none; font-size:1.3rem;
+    transform:translate(-50%,-50%); animation:burst .85s ease-out forwards;
+  }
+  @keyframes burst{
+    0%{ opacity:1; transform:translate(-50%,-50%) scale(.6); }
+    100%{ opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2); }
+  }
+
+  /* Footer tile strip */
+  .footer-tiles{ height:22px; margin:0 -1.5rem 1rem; background:var(--cini-tile) center/36px 22px repeat-x; opacity:.9; }
+  footer{ overflow:hidden; }
+  header::after{ display:none; }
+  .cini-band{
+    height:22px; background:var(--cini-tile) center/36px 22px repeat-x;
+    border-bottom:3px solid var(--iznik-blue);
+  }
+  main{ padding-top:1.5rem; }
