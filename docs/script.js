@@ -372,10 +372,10 @@ function updateHeader(){
   document.getElementById('starsLabel').textContent = total+' / '+max+' yıldız toplandı';
   document.getElementById('moon').style.setProperty('--pct', pct);
   document.getElementById('moonPct').textContent = pct+'%';
-  checkMilestone(pct);
   if(typeof logProgress === 'function') logProgress(total);
   updateStageCards();
   updateStories(total);
+  checkMilestone(pct);  // last, so a milestone toast wins over a new-story toast
   updateLale();
   if(typeof updateExtras === 'function') updateExtras();
   saveProgress();
@@ -1081,6 +1081,7 @@ async function init(){
   if(typeof buildExtras === 'function') buildExtras();
   buildSuras();
   buildPages();
+  if(typeof initVoices === 'function') initVoices();
   updateHeader();
   const note = document.getElementById('persistNote');
   if(note){

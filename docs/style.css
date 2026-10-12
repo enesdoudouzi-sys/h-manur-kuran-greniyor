@@ -572,3 +572,20 @@
   .ex-bars em{ font-style:normal; font-size:.72rem; font-weight:800; }
   .ex-input{ display:block; width:100%; margin:.5rem 0; padding:.6rem .8rem; font:inherit; border:2px solid var(--sand-deep); border-radius:12px; }
   .ex-err{ color:var(--coral); font-weight:700; margin:.4rem 0 0; }
+
+  /* Voice recordings */
+  .voice-box{
+    margin-top:.6rem; background:#F2F6FC; border:1px dashed rgba(31,78,156,.35); border-radius:14px;
+    padding:.7rem .8rem; display:flex; flex-direction:column; gap:6px;
+  }
+  .voice-box audio{ width:100%; height:38px; }
+  .voice-btn{
+    font-family:'Baloo 2'; font-weight:800; font-size:.85rem; cursor:pointer; border:none; border-radius:12px;
+    padding:.45rem .85rem; background:var(--iznik-blue); color:#fff; display:inline-flex; align-items:center; gap:6px;
+  }
+  .voice-btn.ghost{ background:var(--card); color:var(--iznik-blue); border:1px solid rgba(31,78,156,.35); }
+  .voice-btn.rec{ background:var(--iznik-red); animation:recPulse 1.2s ease-in-out infinite; }
+  .voice-btn.danger{ background:var(--iznik-red); }
+  @keyframes recPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(209,73,91,.5);} 50%{ box-shadow:0 0 0 6px rgba(209,73,91,0);} }
+  .sura-block.collapsed .voice-box{ display:none; }
+  .sura-block > .voice-box{ margin:.5rem 0 .6rem; }
