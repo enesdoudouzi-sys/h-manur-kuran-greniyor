@@ -277,3 +277,54 @@
   .reset-btn:hover{ border-color:var(--coral); color:var(--coral); }
   .info-box{ position:relative; z-index:1; }
   .reset-btn{ position:relative; z-index:1; background:var(--sand); }
+
+  /* Letter forms, tracing, lessons */
+  .tabbar{ flex-wrap:wrap; }
+  .tabbar .tab-btn{ min-width:0; padding:.55rem .4rem; }
+  .tab-hint{ font-size:.85rem; color:var(--ink-soft); margin:0 0 .75rem; text-align:center; }
+  .sub-title{ font-family:'Lalezar'; color:var(--teal); font-size:1.1rem; margin:1.25rem 0 .5rem; text-align:center; }
+  .stepper{ display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:.75rem; }
+  .step-btn{
+    width:42px; height:42px; border-radius:50%; border:1px solid var(--teal); background:var(--card);
+    color:var(--teal); font-size:1.5rem; line-height:1; cursor:pointer; font-family:'Baloo 2';
+  }
+  .step-btn:active{ transform:scale(.92); }
+  .step-name{ min-width:110px; text-align:center; font-weight:800; font-size:1.2rem; color:var(--teal); }
+  .forms-boxes{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; direction:rtl; }
+  .form-box{
+    background:var(--card); border:1px solid var(--sand-deep); border-radius:14px;
+    padding:.5rem .25rem; text-align:center;
+  }
+  .form-glyph{ font-size:2.4rem; color:var(--teal); line-height:1.6; }
+  .form-label{ font-size:.75rem; color:var(--ink-soft); font-weight:700; direction:ltr; }
+  .forms-note{ text-align:center; font-size:.8rem; color:var(--ink-soft); margin:.5rem 0 0; }
+
+  .trace-wrap{
+    position:relative; width:100%; max-width:340px; margin:0 auto;
+    background:var(--card); border:2px dashed var(--gold-light); border-radius:18px; overflow:hidden;
+  }
+  .trace-wrap canvas{ position:absolute; top:0; left:50%; transform:translateX(-50%); touch-action:none; }
+  .trace-actions{ display:flex; gap:8px; max-width:340px; margin:.75rem auto 0; }
+
+  .lesson-card{
+    background:var(--card); border:1px solid var(--sand-deep); border-radius:16px;
+    padding:1rem; text-align:center; margin-bottom:1rem;
+  }
+  .lesson-sign{ font-size:2.2rem; color:var(--gold); line-height:1.4; }
+  .lesson-card p{ margin:.25rem 0 .75rem; font-size:.9rem; color:var(--ink); }
+  .lesson-examples{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .example-chip{
+    display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer;
+    background:var(--sand); border:1px solid var(--sand-deep); border-radius:12px;
+    padding:.35rem .8rem; font-family:'Baloo 2'; font-weight:700; color:var(--ink-soft);
+  }
+  .example-chip .arabic{ font-size:1.6rem; color:var(--teal); line-height:1.5; }
+  .example-chip:active{ transform:scale(.95); }
+
+  .sura-title{ cursor:pointer; flex-wrap:wrap; background:var(--card); border:1px solid var(--sand-deep); border-radius:14px; padding:.6rem .8rem; }
+  .sura-title .chevron{ display:inline-block; transition:transform .2s ease; color:var(--gold); }
+  .sura-block:not(.collapsed) .chevron{ transform:rotate(90deg); }
+  .sura-block.collapsed .ayah{ display:none; }
+  .sura-block{ margin-bottom:.75rem; }
+  #traceFeedback{ text-align:center; }
+  .lesson-sign{ font-size:2.6rem; color:var(--teal); word-spacing:.4em; }

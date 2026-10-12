@@ -93,12 +93,111 @@ const SURAS = [
     {ar:"وَالْعَصْرِ", tr:"Ve'l-asr", de:"Zamana (asra) yemin olsun ki,"},
     {ar:"إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ", tr:"İnne'l-insâne lefî husr", de:"İnsan gerçekten ziyan içindedir."},
     {ar:"إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", tr:"İlle'llezîne âmenû ve amilu's-sâlihâti ve tevâsav bi'l-hakkı ve tevâsav bi's-sabr", de:"Ancak iman edip iyi işler yapanlar, birbirlerine hakkı ve sabrı tavsiye edenler bunun dışındadır."}
+  ]},
+  { name:"Fîl Sûresi", note:"Fil", num:105, ayat:[
+    {ar:"أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ", tr:"Elem tera keyfe fe'ale rabbüke bi-ashâbi'l-fîl", de:"Rabbinin fil sahiplerine ne yaptığını görmedin mi?"},
+    {ar:"أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ", tr:"Elem yec'al keydehüm fî tadlîl", de:"Onların tuzaklarını boşa çıkarmadı mı?"},
+    {ar:"وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ", tr:"Ve ersele aleyhim tayran ebâbîl", de:"Üzerlerine sürü sürü kuşlar gönderdi."},
+    {ar:"تَرْمِيهِمْ بِحِجَارَةٍ مِنْ سِجِّيلٍ", tr:"Termîhim bi-hicâratin min siccîl", de:"O kuşlar onlara pişmiş çamurdan taşlar atıyordu."},
+    {ar:"فَجَعَلَهُمْ كَعَصْفٍ مَأْكُولٍ", tr:"Fe ce'alehüm ke'asfin me'kûl", de:"Sonunda onları yenmiş ekin yaprağı gibi yaptı."}
+  ]},
+  { name:"Kureyş Sûresi", note:"Kureyş", num:106, ayat:[
+    {ar:"لِإِيلَافِ قُرَيْشٍ", tr:"Li-îlâfi Kureyş", de:"Kureyş'i alıştırdığı için,"},
+    {ar:"إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ", tr:"Îlâfihim rıhlete'ş-şitâi ve's-sayf", de:"Onları kış ve yaz yolculuğuna alıştırdığı için,"},
+    {ar:"فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ", tr:"Felya'büdû rabbe hâze'l-beyt", de:"Bu evin (Kâbe'nin) Rabbine kulluk etsinler."},
+    {ar:"الَّذِي أَطْعَمَهُمْ مِنْ جُوعٍ وَآمَنَهُمْ مِنْ خَوْفٍ", tr:"Ellezî et'amehüm min cû'in ve âmenehüm min havf", de:"O, onları açlıktan doyurdu ve korkudan emin kıldı."}
+  ]},
+  { name:"Mâûn Sûresi", note:"Yardım", num:107, ayat:[
+    {ar:"أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ", tr:"Era'eytellezî yükezzibü bi'd-dîn", de:"Hesap gününü yalanlayanı gördün mü?"},
+    {ar:"فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ", tr:"Fezâlike'llezî yedu'ü'l-yetîm", de:"İşte o, yetimi itip kakar,"},
+    {ar:"وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ", tr:"Ve lâ yehuddu alâ ta'âmi'l-miskîn", de:"Yoksulu doyurmaya teşvik etmez."},
+    {ar:"فَوَيْلٌ لِلْمُصَلِّينَ", tr:"Fe veylün li'l-musallîn", de:"Vay hâline o namaz kılanların ki,"},
+    {ar:"الَّذِينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ", tr:"Ellezîne hüm an salâtihim sâhûn", de:"Onlar namazlarını önemsemezler,"},
+    {ar:"الَّذِينَ هُمْ يُرَاءُونَ", tr:"Ellezîne hüm yürâûn", de:"Onlar gösteriş yaparlar,"},
+    {ar:"وَيَمْنَعُونَ الْمَاعُونَ", tr:"Ve yemne'ûne'l-mâ'ûn", de:"Ve en küçük yardımı bile esirgerler."}
+  ]},
+  { name:"Kâfirûn Sûresi", note:"İnkâr Edenler", num:109, ayat:[
+    {ar:"قُلْ يَا أَيُّهَا الْكَافِرُونَ", tr:"Kul yâ eyyühe'l-kâfirûn", de:"De ki: Ey inkâr edenler!"},
+    {ar:"لَا أَعْبُدُ مَا تَعْبُدُونَ", tr:"Lâ a'büdü mâ ta'büdûn", de:"Ben sizin taptıklarınıza tapmam."},
+    {ar:"وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", tr:"Ve lâ entüm âbidûne mâ a'büd", de:"Siz de benim taptığıma tapacak değilsiniz."},
+    {ar:"وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ", tr:"Ve lâ ene âbidün mâ abedtüm", de:"Ben de sizin taptıklarınıza tapacak değilim."},
+    {ar:"وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", tr:"Ve lâ entüm âbidûne mâ a'büd", de:"Siz de benim taptığıma tapacak değilsiniz."},
+    {ar:"لَكُمْ دِينُكُمْ وَلِيَ دِينِ", tr:"Leküm dînüküm ve liye dîn", de:"Sizin dininiz size, benim dinim bana."}
+  ]},
+  { name:"Nasr Sûresi", note:"Yardım ve Zafer", num:110, ayat:[
+    {ar:"إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ", tr:"İzâ câe nasrullâhi ve'l-feth", de:"Allah'ın yardımı ve fetih geldiğinde,"},
+    {ar:"وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا", tr:"Ve raeyte'n-nâse yedhulûne fî dînillâhi efvâcâ", de:"Ve insanların bölük bölük Allah'ın dinine girdiğini gördüğünde,"},
+    {ar:"فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا", tr:"Fe sebbih bi-hamdi rabbike vestağfirh, innehû kâne tevvâbâ", de:"Rabbini överek tesbih et ve O'ndan bağışlanma dile. Çünkü O, tövbeleri çok kabul edendir."}
+  ]},
+  { name:"Tebbet Sûresi", note:"Mesed", num:111, ayat:[
+    {ar:"تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ", tr:"Tebbet yedâ ebî lehebin ve tebb", de:"Ebû Leheb'in elleri kurusun! Kurudu da."},
+    {ar:"مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ", tr:"Mâ ağnâ anhü mâlühû ve mâ keseb", de:"Malı ve kazandıkları ona fayda vermedi."},
+    {ar:"سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ", tr:"Seyaslâ nâran zâte leheb", de:"O, alevli bir ateşe girecektir."},
+    {ar:"وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ", tr:"Vemraetühû hammâlete'l-hatab", de:"Odun taşıyıcı olarak karısı da."},
+    {ar:"فِي جِيدِهَا حَبْلٌ مِنْ مَسَدٍ", tr:"Fî cîdihâ hablün min mesed", de:"Boynunda hurma lifinden bir ip olduğu hâlde."}
   ]}
 ];
 const TOTAL_AYAT = SURAS.reduce((n,s)=> n + s.ayat.length, 0);
+
+// Letters that never connect to the following letter.
+const NON_CONNECTORS = new Set(["ا","د","ذ","ر","ز","و"]);
+const TATWEEL = "\u0640";
+function letterForms(g){
+  if(NON_CONNECTORS.has(g)) return {iso:g, ini:g, med:TATWEEL+g, fin:TATWEEL+g};
+  return {iso:g, ini:g+TATWEEL, med:TATWEEL+g+TATWEEL, fin:TATWEEL+g};
+}
+const FORM_LABELS = [["iso","Tek başına"],["ini","Başta"],["med","Ortada"],["fin","Sonda"]];
+
+const LESSONS = [
+  { id:"tenvin", title:"Tenvin", sign:"بً  بٍ  بٌ",
+    text:"İki üstün, iki esre veya iki ötre harfin sonuna bir \"n\" sesi ekler.",
+    examples:[["بً","ban"],["بٍ","bin"],["بٌ","bun"]],
+    items:[
+      {g:"بً", correct:"ban", options:["ban","bin","bun","ba"]},
+      {g:"بٍ", correct:"bin", options:["bin","ban","bi","bun"]},
+      {g:"بٌ", correct:"bun", options:["bun","bu","ban","bin"]},
+      {g:"تً", correct:"tan", options:["tan","ta","tin","tun"]},
+      {g:"مٍ", correct:"min", options:["min","mi","man","mun"]},
+      {g:"نٌ", correct:"nun", options:["nun","nu","nan","nin"]}
+    ]},
+  { id:"cezm", title:"Cezm", sign:"بْ",
+    text:"Cezimli harf harekesiz, kısa okunur ve kendinden önceki harfle birleşir.",
+    examples:[["أَبْ","ab"],["إِبْ","ib"],["أُبْ","ub"]],
+    items:[
+      {g:"أَبْ", correct:"ab", options:["ab","ba","ib","ub"]},
+      {g:"إِبْ", correct:"ib", options:["ib","bi","ab","ub"]},
+      {g:"أُبْ", correct:"ub", options:["ub","bu","ab","ib"]},
+      {g:"مِنْ", correct:"min", options:["min","mi","nim","man"]},
+      {g:"لَمْ", correct:"lam", options:["lam","la","mal","lim"]},
+      {g:"قُلْ", correct:"kul", options:["kul","ku","kal","luk"]}
+    ]},
+  { id:"sedde", title:"Şedde", sign:"بّ",
+    text:"Şeddeli harf iki kere okunur: önce cezimli, sonra harekeli (ab-ba).",
+    examples:[["أَبَّ","abba"],["إِبِّ","ibbi"],["أُبُّ","ubbu"]],
+    items:[
+      {g:"أَبَّ", correct:"abba", options:["abba","aba","ab","ibbi"]},
+      {g:"إِبِّ", correct:"ibbi", options:["ibbi","ibi","ib","abba"]},
+      {g:"أُبُّ", correct:"ubbu", options:["ubbu","ubu","ub","ibbi"]},
+      {g:"رَبِّ", correct:"rabbi", options:["rabbi","rabi","rab","rubbu"]},
+      {g:"إِنَّ", correct:"inna", options:["inna","ina","in","unna"]},
+      {g:"ثُمَّ", correct:"summa", options:["summa","suma","sum","samma"]}
+    ]},
+  { id:"med", title:"Med (Uzatma)", sign:"بَا  بِي  بُو",
+    text:"Üstünden sonra elif (ا), esreden sonra ye (ي), ötreden sonra vav (و) gelirse ses uzatılır.",
+    examples:[["بَا","bâ"],["بِي","bî"],["بُو","bû"]],
+    items:[
+      {g:"بَا", correct:"bâ", options:["bâ","ba","bî","bû"]},
+      {g:"بِي", correct:"bî", options:["bî","bi","bâ","bû"]},
+      {g:"بُو", correct:"bû", options:["bû","bu","bâ","bî"]},
+      {g:"نَا", correct:"nâ", options:["nâ","na","nî","nû"]},
+      {g:"مِي", correct:"mî", options:["mî","mi","mâ","mû"]},
+      {g:"نُو", correct:"nû", options:["nû","nu","nâ","nî"]}
+    ]}
+];
+const LESSON_ITEM_COUNT = LESSONS.reduce((n,l)=> n + l.items.length, 0);
 const PAGE_COUNT = 10;
 
-const state = { letters:{}, syllables:{}, suraAyat:{}, pages:{} };
+const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{} };
 let currentStage = null;
 
 // ---------- Persistence ----------
@@ -119,10 +218,9 @@ let saveTimer = null;
 
 function applySaved(saved){
   if(!saved) return;
-  if(saved.letters) Object.assign(state.letters, saved.letters);
-  if(saved.syllables) Object.assign(state.syllables, saved.syllables);
-  if(saved.suraAyat) Object.assign(state.suraAyat, saved.suraAyat);
-  if(saved.pages) Object.assign(state.pages, saved.pages);
+  Object.keys(state).forEach(k=>{
+    if(saved[k] && typeof saved[k] === 'object') Object.assign(state[k], saved[k]);
+  });
 }
 
 async function loadProgress(){
@@ -211,12 +309,18 @@ function shuffle(arr){
 }
 function countTrue(obj){ return Object.values(obj).filter(Boolean).length; }
 
+const STAGE1_MAX = LETTERS.length * 3; // cards + forms + tracing
+
 function totalStars(){
   const l = countTrue(state.letters);
+  const f = countTrue(state.forms);
+  const t = countTrue(state.trace);
   const s = countTrue(state.syllables);
+  const d = countTrue(state.lessons);
   const q = countTrue(state.suraAyat);
   const p = countTrue(state.pages);
-  return {l,s,q,p, total:l+s+q+p, max: LETTERS.length + SYLLABLES.length + TOTAL_AYAT + PAGE_COUNT};
+  return {l,f,t,s,d,q,p, stage1:l+f+t, total:l+f+t+s+d+q+p,
+    max: STAGE1_MAX + SYLLABLES.length + LESSON_ITEM_COUNT + TOTAL_AYAT + PAGE_COUNT};
 }
 
 function showToast(msg){
@@ -256,17 +360,19 @@ function updateHeader(){
 }
 
 function updateStageCards(){
-  const {l,s,q,p} = totalStars();
-  document.getElementById('stars-letters').textContent = l+' / '+LETTERS.length+' ★';
+  const {l,s,d,q,p,stage1} = totalStars();
+  document.getElementById('stars-letters').textContent = stage1+' / '+STAGE1_MAX+' ★';
   document.getElementById('stars-syllables').textContent = s+' / '+SYLLABLES.length+' ★';
+  document.getElementById('stars-lessons').textContent = d+' / '+LESSON_ITEM_COUNT+' ★';
   document.getElementById('stars-suras').textContent = q+' / '+TOTAL_AYAT+' ★';
   document.getElementById('stars-pages').textContent = p+' / '+PAGE_COUNT+' ★';
   setLock('syllables', l/LETTERS.length < 0.3);
+  setLock('lessons', s/SYLLABLES.length < 0.3);
   setLock('suras', s/SYLLABLES.length < 0.3);
-  setLock('pages', q/TOTAL_AYAT < 0.3);
+  setLock('pages', q < 7);
 
   // Highlight the stage the child should work on next.
-  const progress = {letters:l/LETTERS.length, syllables:s/SYLLABLES.length, suras:q/TOTAL_AYAT, pages:p/PAGE_COUNT};
+  const progress = {letters:stage1/STAGE1_MAX, syllables:s/SYLLABLES.length, lessons:d/LESSON_ITEM_COUNT, suras:q/TOTAL_AYAT, pages:p/PAGE_COUNT};
   const nodes = [...document.querySelectorAll('.stage-node')];
   nodes.forEach(n=> n.classList.remove('active'));
   const next = nodes.find(n=> !n.classList.contains('locked') && progress[n.dataset.stage] < 1);
@@ -303,12 +409,61 @@ function onStageKey(e, stage){
   if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openStage(stage); }
 }
 
+const LETTER_TABS = ['cards','forms','trace','quiz'];
 function switchTab(tab){
-  document.getElementById('tab-cards').classList.toggle('active', tab==='cards');
-  document.getElementById('tab-quiz').classList.toggle('active', tab==='quiz');
-  document.getElementById('content-cards').classList.toggle('active', tab==='cards');
-  document.getElementById('content-quiz').classList.toggle('active', tab==='quiz');
+  LETTER_TABS.forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+    document.getElementById('content-'+t).classList.toggle('active', t===tab);
+  });
   if(tab==='quiz') renderLetterQuiz();
+  if(tab==='trace') tracer.show();
+}
+
+// ---------- Generic multiple-choice quiz ----------
+// ids: {progress, glyph, options, feedback}; getItems() returns
+// [{key, g, correct, options, say?}]; onCorrect(item) records the star.
+function makeQuiz(ids, getItems, onCorrect, label){
+  const q = {items:[], order:[], index:0, locked:false};
+  const $ = id=> document.getElementById(id);
+  q.load = ()=>{
+    q.items = getItems();
+    q.order = shuffle([...q.items.keys()]);
+    q.index = 0;
+    q.render();
+  };
+  q.render = ()=>{
+    q.locked = false;
+    if(q.index >= q.order.length){ q.order = shuffle([...q.items.keys()]); q.index = 0; }
+    const item = q.items[q.order[q.index]];
+    $(ids.glyph).textContent = item.g;
+    $(ids.progress).textContent = (label||'Soru')+' '+(q.index+1)+' / '+q.order.length;
+    $(ids.feedback).textContent = '';
+    const wrap = $(ids.options);
+    wrap.innerHTML = '';
+    shuffle([...item.options]).forEach(o=>{
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = o;
+      btn.onclick = ()=> q.answer(o, item, btn);
+      wrap.appendChild(btn);
+    });
+  };
+  q.answer = (choice, item, btn)=>{
+    if(q.locked) return;
+    if(choice === item.correct){
+      q.locked = true;
+      btn.classList.add('correct');
+      $(ids.feedback).textContent = randomPraise();
+      speakArabic(item.say || item.g);
+      onCorrect(item);
+      setTimeout(()=>{ q.index++; q.render(); }, 1100);
+    } else {
+      btn.classList.add('wrong');
+      btn.disabled = true;
+      $(ids.feedback).textContent = 'Tekrar dene!';
+    }
+  };
+  return q;
 }
 
 // ---------- Stage 1: Letters ----------
@@ -413,44 +568,231 @@ function answerLetterQuiz(isCorrect, idx, btn){
   }
 }
 
-// ---------- Stage 2: Syllables ----------
-let quizOrder = shuffle([...Array(SYLLABLES.length).keys()]);
-let quizIndex = 0;
-let quizLocked = false;
+// ---------- Stage 1b: Letter forms ----------
+let formsIndex = 0;
+function renderFormsView(){
+  const L = LETTERS[formsIndex];
+  const forms = letterForms(L.g);
+  document.getElementById('formsName').textContent = L.name;
+  document.getElementById('formsBoxes').innerHTML = FORM_LABELS.map(([k,label])=>
+    `<div class="form-box"><div class="arabic form-glyph">${forms[k]}</div><div class="form-label">${label}</div></div>`
+  ).join('');
+  document.getElementById('formsNote').textContent = NON_CONNECTORS.has(L.g)
+    ? 'Bu harf kendisinden sonraki harfe bağlanmaz.'
+    : 'Bu harf iki tarafa da bağlanabilir.';
+}
+function stepForms(d){
+  formsIndex = (formsIndex + d + LETTERS.length) % LETTERS.length;
+  renderFormsView();
+}
+const formsQuiz = makeQuiz(
+  {progress:'formsQuizProgress', glyph:'formsQuizGlyph', options:'formsQuizOptions', feedback:'formsQuizFeedback'},
+  ()=> LETTERS.map((L, i)=>{
+    const forms = letterForms(L.g);
+    const pos = ['ini','med','fin'][Math.floor(Math.random()*3)];
+    const others = shuffle(LETTERS.map((_, j)=> j).filter(j=> j !== i)).slice(0,3);
+    return {key:i, g:forms[pos], correct:L.name, say:L.ar, options:[L.name, ...others.map(j=> LETTERS[j].name)]};
+  }),
+  item=>{ if(!state.forms[item.key]){ state.forms[item.key] = true; updateHeader(); } }
+);
 
-function renderQuiz(){
-  quizLocked = false;
-  if(quizIndex >= quizOrder.length){ quizOrder = shuffle([...Array(SYLLABLES.length).keys()]); quizIndex = 0; }
-  const item = SYLLABLES[quizOrder[quizIndex]];
-  document.getElementById('quizGlyph').textContent = item.g;
-  document.getElementById('quizProgress').textContent = 'Tur '+(quizIndex+1)+' / '+quizOrder.length;
-  const optWrap = document.getElementById('quizOptions');
-  optWrap.innerHTML = '';
-  document.getElementById('quizFeedback').textContent = '';
-  shuffle([...item.options]).forEach(o=>{
-    const btn = document.createElement('button');
-    btn.className = 'quiz-opt';
-    btn.textContent = o;
-    btn.onclick = ()=> answerQuiz(o, item, btn);
-    optWrap.appendChild(btn);
+// ---------- Stage 1c: Tracing ----------
+// The letter is drawn faintly; the child traces it with a finger. Coverage of
+// the letter shape and how much ink stays near it decide whether it counts.
+const tracer = (()=>{
+  let index = 0, drawing = false, ready = false, last = null;
+  let guide, ink, size = 300, dpr = 1;
+  const FONT = '"Scheherazade New", serif';
+
+  function els(){
+    guide = document.getElementById('traceGuide');
+    ink = document.getElementById('traceInk');
+  }
+  function fontPx(){ return Math.round(size * 0.62); }
+  function drawLetter(ctx, color, strokeWidth){
+    const g = LETTERS[index].g;
+    ctx.save();
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.font = fontPx()+'px '+FONT;
+    ctx.textAlign = 'center';
+    ctx.direction = 'rtl';
+    ctx.textBaseline = 'alphabetic';
+    const m = ctx.measureText(g);
+    const asc = m.actualBoundingBoxAscent || fontPx()*0.5;
+    const desc = m.actualBoundingBoxDescent || 0;
+    const y = size/2 + (asc - desc)/2;
+    ctx.fillStyle = color;
+    ctx.fillText(g, size/2, y);
+    if(strokeWidth){
+      ctx.lineWidth = strokeWidth;
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = color;
+      ctx.strokeText(g, size/2, y);
+    }
+    ctx.restore();
+  }
+  function resize(){
+    const wrap = document.getElementById('traceWrap');
+    size = Math.min(wrap.clientWidth || 300, 340);
+    dpr = window.devicePixelRatio || 1;
+    [guide, ink].forEach(c=>{
+      c.width = size*dpr; c.height = size*dpr;
+      c.style.width = size+'px'; c.style.height = size+'px';
+    });
+    wrap.style.height = size+'px';
+  }
+  function render(){
+    if(!guide) els();
+    resize();
+    const gctx = guide.getContext('2d');
+    gctx.clearRect(0,0,guide.width,guide.height);
+    drawLetter(gctx, 'rgba(15,92,86,.22)', 0);
+    clearInk();
+    const L = LETTERS[index];
+    document.getElementById('traceName').textContent = L.name + (state.trace[index] ? ' ★' : '');
+    document.getElementById('traceFeedback').textContent = '';
+  }
+  function clearInk(){
+    const ctx = ink.getContext('2d');
+    ctx.clearRect(0,0,ink.width,ink.height);
+  }
+  function point(e){
+    const r = ink.getBoundingClientRect();
+    return {x:e.clientX - r.left, y:e.clientY - r.top};
+  }
+  function strokeTo(pt){
+    const ctx = ink.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.strokeStyle = '#CC9A3C';
+    ctx.lineWidth = size*0.06;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(last.x, last.y);
+    ctx.lineTo(pt.x, pt.y);
+    ctx.stroke();
+    last = pt;
+  }
+  function bind(){
+    ink.addEventListener('pointerdown', e=>{
+      e.preventDefault();
+      drawing = true;
+      ink.setPointerCapture(e.pointerId);
+      last = point(e);
+      strokeTo({x:last.x+0.1, y:last.y+0.1});
+    });
+    ink.addEventListener('pointermove', e=>{ if(drawing) strokeTo(point(e)); });
+    const end = ()=>{ drawing = false; };
+    ink.addEventListener('pointerup', end);
+    ink.addEventListener('pointercancel', end);
+  }
+  function score(){
+    const w = ink.width, h = ink.height;
+    const mask = document.createElement('canvas'); mask.width = w; mask.height = h;
+    const near = document.createElement('canvas'); near.width = w; near.height = h;
+    drawLetter(mask.getContext('2d'), '#000', 0);
+    drawLetter(near.getContext('2d'), '#000', size*0.12);
+    const m = mask.getContext('2d').getImageData(0,0,w,h).data;
+    const n = near.getContext('2d').getImageData(0,0,w,h).data;
+    const u = ink.getContext('2d').getImageData(0,0,w,h).data;
+    let letterPx = 0, covered = 0, inkPx = 0, inkNear = 0;
+    const step = Math.max(1, Math.round(2*dpr));
+    for(let y = 0; y < h; y += step){
+      for(let x = 0; x < w; x += step){
+        const a = (y*w + x)*4 + 3;
+        const inLetter = m[a] > 128, hasInk = u[a] > 0;
+        if(inLetter){ letterPx++; if(hasInk) covered++; }
+        if(hasInk){ inkPx++; if(n[a] > 0) inkNear++; }
+      }
+    }
+    return {coverage: letterPx ? covered/letterPx : 0, precision: inkPx ? inkNear/inkPx : 0};
+  }
+  function check(){
+    const fb = document.getElementById('traceFeedback');
+    const {coverage, precision} = score();
+    if(coverage >= 0.55 && precision >= 0.7){
+      fb.textContent = randomPraise();
+      speakArabic(LETTERS[index].ar);
+      if(!state.trace[index]){ state.trace[index] = true; updateHeader(); }
+      document.getElementById('traceName').textContent = LETTERS[index].name + ' ★';
+    } else if(precision < 0.7){
+      fb.textContent = 'Çizgilerin harfin dışına taştı. Silip tekrar dene!';
+    } else {
+      fb.textContent = 'Harfin tamamını çiz. Biraz daha!';
+    }
+  }
+  return {
+    async show(){
+      if(!ready){
+        els(); bind(); ready = true;
+        try{ await document.fonts.load(fontPx()+'px "Scheherazade New"', LETTERS[0].g); }catch(e){}
+      }
+      render();
+    },
+    step(d){ index = (index + d + LETTERS.length) % LETTERS.length; render(); },
+    clear(){ clearInk(); document.getElementById('traceFeedback').textContent = ''; },
+    check
+  };
+})();
+
+// ---------- Stage 2: Syllables ----------
+const syllableQuiz = makeQuiz(
+  {progress:'quizProgress', glyph:'quizGlyph', options:'quizOptions', feedback:'quizFeedback'},
+  ()=> SYLLABLES.map((x, i)=> ({...x, key:i})),
+  item=>{ if(!state.syllables[item.key]){ state.syllables[item.key] = true; updateHeader(); } },
+  'Tur'
+);
+
+// ---------- Stage 3: Reading lessons ----------
+let currentLesson = 0;
+const lessonQuiz = makeQuiz(
+  {progress:'lessonQuizProgress', glyph:'lessonQuizGlyph', options:'lessonQuizOptions', feedback:'lessonQuizFeedback'},
+  ()=> LESSONS[currentLesson].items.map((x, i)=> ({...x, key:LESSONS[currentLesson].id+'-'+i})),
+  item=>{
+    if(!state.lessons[item.key]){ state.lessons[item.key] = true; updateLessonTabs(); updateHeader(); }
+  }
+);
+function lessonDone(li){
+  const L = LESSONS[li];
+  return L.items.filter((_, i)=> state.lessons[L.id+'-'+i]).length;
+}
+function buildLessons(){
+  const bar = document.getElementById('lessonTabs');
+  bar.innerHTML = '';
+  LESSONS.forEach((L, li)=>{
+    const b = document.createElement('button');
+    b.className = 'tab-btn';
+    b.id = 'lessontab-'+li;
+    b.onclick = ()=> selectLesson(li);
+    bar.appendChild(b);
+  });
+  updateLessonTabs();
+  selectLesson(0);
+}
+function updateLessonTabs(){
+  LESSONS.forEach((L, li)=>{
+    const b = document.getElementById('lessontab-'+li);
+    if(!b) return;
+    const done = lessonDone(li);
+    b.textContent = L.title + (done === L.items.length ? ' 🏅' : '');
   });
 }
-function answerQuiz(choice, item, btn){
-  if(quizLocked) return;
-  const feedback = document.getElementById('quizFeedback');
-  if(choice === item.correct){
-    quizLocked = true;
-    btn.classList.add('correct');
-    feedback.textContent = randomPraise();
-    speakArabic(item.g);
-    const key = quizOrder[quizIndex];
-    if(!state.syllables[key]){ state.syllables[key] = true; updateHeader(); }
-    setTimeout(()=>{ quizIndex++; renderQuiz(); }, 1100);
-  } else {
-    btn.classList.add('wrong');
-    btn.disabled = true;
-    feedback.textContent = 'Tekrar dene!';
-  }
+function selectLesson(li){
+  currentLesson = li;
+  LESSONS.forEach((_, i)=> document.getElementById('lessontab-'+i).classList.toggle('active', i===li));
+  const L = LESSONS[li];
+  document.getElementById('lessonSign').textContent = L.sign;
+  document.getElementById('lessonText').textContent = L.text;
+  const ex = document.getElementById('lessonExamples');
+  ex.innerHTML = '';
+  L.examples.forEach(([g, t])=>{
+    const b = document.createElement('button');
+    b.className = 'example-chip';
+    b.innerHTML = `<span class="arabic">${g}</span><span>${t}</span>`;
+    b.onclick = ()=> speakArabic(g);
+    ex.appendChild(b);
+  });
+  lessonQuiz.load();
 }
 
 // ---------- Stage 3: Suras ----------
@@ -467,10 +809,13 @@ function buildSuras(){
   const wrap = document.getElementById('surasWrap');
   SURAS.forEach((sura, si)=>{
     const block = document.createElement('div');
-    block.className = 'sura-block';
-    block.innerHTML = `<div class="sura-title">${sura.name} <span class="badge">${sura.note}</span>
+    block.className = 'sura-block collapsed';
+    block.id = 'sura-'+si;
+    block.innerHTML = `<div class="sura-title" onclick="toggleSuraBlock(${si})" role="button" tabindex="0"
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSuraBlock(${si});}">
+      <span class="chevron">▸</span>${sura.name} <span class="badge">${sura.note}</span>
       <span class="sura-count" id="suracount-${si}"></span>
-      <button class="play-all-btn" id="playall-${si}" onclick="toggleWholeSura(${si})">▶ Sûreyi dinle</button></div>`;
+      <button class="play-all-btn" id="playall-${si}" onclick="event.stopPropagation(); toggleWholeSura(${si})">▶ Dinle</button></div>`;
     sura.ayat.forEach((a, ai)=>{
       const key = si+'-'+ai;
       a.audio = audioUrl(sura.num, ai+1);
@@ -495,6 +840,16 @@ function buildSuras(){
     wrap.appendChild(block);
     updateSuraCount(si);
   });
+  // Open the first sura that isn't fully memorised yet.
+  const firstOpen = SURAS.findIndex((s, si)=> !s.ayat.every((_, ai)=> state.suraAyat[si+'-'+ai]));
+  toggleSuraBlock(firstOpen === -1 ? 0 : firstOpen, true);
+}
+
+function toggleSuraBlock(si, open){
+  const b = document.getElementById('sura-'+si);
+  if(!b) return;
+  const willOpen = open === undefined ? b.classList.contains('collapsed') : open;
+  b.classList.toggle('collapsed', !willOpen);
 }
 
 function updateSuraCount(si){
@@ -508,7 +863,7 @@ function updateSuraCount(si){
 
 function setPlayAllLabel(si, playing){
   const b = document.getElementById('playall-'+si);
-  if(b) b.textContent = playing ? '■ Durdur' : '▶ Sûreyi dinle';
+  if(b) b.textContent = playing ? '■ Durdur' : '▶ Dinle';
 }
 
 function stopAudio(){
@@ -559,6 +914,7 @@ function playAyah(si, ai){
 function toggleWholeSura(si){
   if(playAllSura === si){ stopAudio(); return; }
   stopAudio();
+  toggleSuraBlock(si, true);
   playAllSura = si;
   setPlayAllLabel(si, true);
   let ai = 0;
@@ -616,7 +972,10 @@ async function init(){
   const startPct = currentPct();
   lastMilestone = [25,50,75,100].filter(s=> startPct >= s).pop() || 0;
   buildLetters();
-  renderQuiz();
+  renderFormsView();
+  formsQuiz.load();
+  syllableQuiz.load();
+  buildLessons();
   buildSuras();
   buildPages();
   updateHeader();
