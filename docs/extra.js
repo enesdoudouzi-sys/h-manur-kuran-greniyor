@@ -401,6 +401,7 @@ function letterExtra(g){
       <div class="ex-grow"><div class="arabic ex-ar">${m[2]}</div><div class="ex-sub">Sûre başında harf adıyla okunur (${SADI[m[0]]||'Sûre '+m[0]}, ${m[1]}. âyet)</div></div></div>`;
     html += `</div>`;
   }
+  if(typeof voiceBox === 'function') html += voiceBox('l:'+g);
   return html;
 }
 
@@ -631,7 +632,8 @@ function vDua(){
       <button class="ex-item-head" type="button" onclick="exUI.dua = exUI.dua==='${d.id}' ? null : '${d.id}'; renderExtra('dua')">
         <span class="ex-num">${state.extra[key]?'✓':'🤲'}</span><span class="ex-grow"><b>${d.t}</b><span class="ex-sub">${d.w}</span></span><span class="chevron">▸</span></button>
       ${open ? `<div class="ex-item-body"><div class="arabic ex-ar-lg">${d.ar}</div><div class="ex-okunus">${d.ok}</div>
-        <div class="ex-mean"><b>Anlamı</b><p>${d.m}</p></div><div class="ex-row">${exSpeak(d.ar)}${exBtn(key,'Ezberledim')}</div></div>` : ''}</div>`;
+        <div class="ex-mean"><b>Anlamı</b><p>${d.m}</p></div><div class="ex-row">${exSpeak(d.ar)}${exBtn(key,'Ezberledim')}</div>
+        ${typeof voiceBox === 'function' ? voiceBox(key) : ''}</div>` : ''}</div>`;
   }).join('');
 }
 
@@ -794,7 +796,12 @@ function vVeli(){
     <div class="ex-label">Sırada ezberlenecekler</div>
     <div class="ex-card">${left.length ? `<div class="chips">${left.map(x=> `<span class="chip gold">${x}</span>`).join('')}</div>` : '<p>Tüm sûre ve dualar tamamlandı. Maşallah!</p>'}</div>
     <div class="ex-row"><button class="ex-learn" type="button" onclick="copySummary()">Özeti kopyala</button><button class="reset-btn" type="button" onclick="resetProgress()">İlerlemeyi sıfırla</button></div>
-    <p class="tab-hint">Kayıtlar bu sürümden itibaren tutulur. İlerleme bu cihazda saklanır.</p>`;
+    <div class="ex-label">Başka cihaza taşı</div>
+    <div class="ex-card"><p>İlerleme bu cihazda saklanır. Başka bir telefona veya tablete geçmek için önce burada dosyayı indir, sonra diğer cihazda bu panelden yükle. Yüklenen ilerleme mevcut olanla birleştirilir; hiçbir yıldız kaybolmaz.</p>
+      <div class="ex-row"><button class="ex-learn" type="button" onclick="exportProgress()">📥 İlerlemeyi indir</button>
+      <label class="voice-btn ghost">📤 Dosyadan yükle<input type="file" accept="application/json,.json" hidden onchange="importProgress(this)"></label></div>
+      <p class="ex-sub">Ses kayıtları dosyaya dahil değildir; her cihazda ayrıca kaydedilir.</p></div>
+    <p class="tab-hint">Kayıtlar bu sürümden itibaren tutulur.</p>`;
 }
 function parentCheck(){
   const v = +(document.getElementById('pans')||{}).value;
