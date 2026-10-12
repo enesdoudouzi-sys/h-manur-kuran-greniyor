@@ -450,3 +450,4 @@
     border-bottom:3px solid var(--iznik-blue);
   }
   main{ padding-top:1.5rem; }
+  a.stage-node{ text-decoration:none; color:inherit; }
