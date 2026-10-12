@@ -4,11 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hümanur'un Kur'an Yolculuğu</title>
+<meta name="description" content="Çocuklar için Elifbe, hece, kısa sûreler ve okuma takibi – eğlenceli bir öğrenme oyunu.">
+<meta name="theme-color" content="#0F3B37">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Hümanur">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Lalezar&family=Scheherazade+New:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<noscript><p style="padding:1rem;text-align:center">Bu uygulama için JavaScript gereklidir.</p></noscript>
 <div id="appRoot" class="app-root">
 <div class="save-indicator" id="saveIndicator"><i></i>Kaydedildi</div>
 
@@ -33,7 +42,7 @@
 
   <section id="mapView" class="journey">
     <div class="path-line"></div>
-    <div class="stage-node" data-stage="letters" onclick="openStage('letters')">
+    <div class="stage-node" data-stage="letters" onclick="openStage('letters')" onkeydown="onStageKey(event,'letters')" role="button" tabindex="0">
       <div class="stage-badge">ا</div>
       <div class="stage-body">
         <h3>1. Elifbe – Harf Kâşifi</h3>
@@ -42,27 +51,27 @@
       </div>
     </div>
 
-    <div class="stage-node locked" data-stage="syllables" onclick="openStage('syllables')">
+    <div class="stage-node locked" data-stage="syllables" onclick="openStage('syllables')" onkeydown="onStageKey(event,'syllables')" role="button" tabindex="0">
       <div class="stage-badge">بَ</div>
       <div class="stage-body">
         <h3>2. Hece Ustası</h3>
         <p>Harfleri ve harekeleri (üstün, esre, ötre) seslerle birleştir</p>
-        <div class="stage-stars" id="stars-syllables">0 / 12 ★</div>
+        <div class="stage-stars" id="stars-syllables">0 / 30 ★</div>
       </div>
       <div class="lock-icon" id="lock-syllables">🔒</div>
     </div>
 
-    <div class="stage-node locked" data-stage="suras" onclick="openStage('suras')">
+    <div class="stage-node locked" data-stage="suras" onclick="openStage('suras')" onkeydown="onStageKey(event,'suras')" role="button" tabindex="0">
       <div class="stage-badge">📖</div>
       <div class="stage-body">
         <h3>3. Sûre Koleksiyoncusu</h3>
-        <p>Kısa sûreleri âyet âyet ezberle</p>
-        <div class="stage-stars" id="stars-suras">0 / 17 ★</div>
+        <p>Fâtiha, İhlâs, Nâs, Felak, Kevser ve Asr sûrelerini âyet âyet ezberle</p>
+        <div class="stage-stars" id="stars-suras">0 / 28 ★</div>
       </div>
       <div class="lock-icon" id="lock-suras">🔒</div>
     </div>
 
-    <div class="stage-node locked" data-stage="pages" onclick="openStage('pages')">
+    <div class="stage-node locked" data-stage="pages" onclick="openStage('pages')" onkeydown="onStageKey(event,'pages')" role="button" tabindex="0">
       <div class="stage-badge">🏆</div>
       <div class="stage-body">
         <h3>4. Okuma Kahramanı</h3>
@@ -75,6 +84,7 @@
     <div class="info-box">
       <b>Ebeveynler için not:</b> Harfleri, heceleri ve âyetleri lütfen birlikte yüksek sesle tekrar edin — mümkünse bir ebeveyn, hoca veya DITIB Kur'an kursu öğretmeni eşliğinde, çünkü doğru telaffuz (tecvid) ancak canlı bir rehberlikle tam oturur. Bu uygulamadaki içerikler (harf isimleri, sûre metinleri ve anlamları) genel olarak bilinen ve Diyanet İşleri Başkanlığı'nın yaygın kullanılan meallerine dayanan kaynaklar dikkate alınarak özenle hazırlanmıştır; ancak resmî bir dini danışmanlığın yerini tutmaz. Kesin doğrulama için lütfen bir hocaya veya DITIB Kur'an kursuna danışın. Sûre bölümündeki 🔊 seslendirme, tanınmış kâri Mishary Alafasy'nin okuyuşuyla, everyayah.com açık kaynağından canlı olarak yüklenir; bu nedenle internet bağlantısı gerekir. <span id="persistNote"></span>
     </div>
+    <button class="reset-btn" type="button" onclick="resetProgress()">İlerlemeyi sıfırla</button>
   </section>
 
   <!-- STAGE 1: LETTERS -->
@@ -82,7 +92,7 @@
     <button class="back-btn" onclick="closeStage()">← Yolculuğa dön</button>
     <div class="panel-header">
       <h2>Elifbe – Harf Kâşifi</h2>
-      <p>Kartlara dokunarak harfleri öğren, sonra karışık sorularla pekiştir. Her doğruda bir yıldız kazanılır.</p>
+      <p>Kartlara dokunarak harfleri öğren, 🔊 ile harfin adını dinle, sonra karışık sorularla pekiştir. Her doğruda bir yıldız kazanılır.</p>
     </div>
     <div class="tabbar">
       <button class="tab-btn active" id="tab-cards" onclick="switchTab('cards')">Harf Kartları</button>
@@ -107,7 +117,7 @@
     <button class="back-btn" onclick="closeStage()">← Yolculuğa dön</button>
     <div class="panel-header">
       <h2>Hece Ustası</h2>
-      <p>Bu işarete hangi ses uyuyor?</p>
+      <p>Bu işarete hangi ses uyuyor? Üstün (َ) → a, esre (ِ) → i, ötre (ُ) → u. Doğru cevaptan sonra hece seslendirilir.</p>
     </div>
     <div class="quiz-progress" id="quizProgress"></div>
     <div class="quiz-box">
@@ -124,7 +134,7 @@
       <h2>Sûre Koleksiyoncusu</h2>
       <p>Âyet âyet tekrar et, sonra "ezbere biliyorum" kutucuğunu işaretle.</p>
     </div>
-    <div class="audio-hint">🔊 Seslendirme, Mishary Alafasy'nin okuyuşuyla everyayah.com kaynağından yükleniyor (internet bağlantısı gerekir). Çalışmazsa dosyayı indirip doğrudan tarayıcıda (önizleme dışında) açmayı dene.</div>
+    <div class="audio-hint">🔊 Seslendirme, Mishary Alafasy'nin okuyuşuyla everyayah.com kaynağından yükleniyor (internet bağlantısı gerekir). Bir âyete tekrar dokunursan ses durur.</div>
     <div id="surasWrap"></div>
   </section>
 
