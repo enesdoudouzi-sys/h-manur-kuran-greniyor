@@ -137,7 +137,7 @@ const SURAS = [
     {ar:"فِي جِيدِهَا حَبْلٌ مِنْ مَسَدٍ", tr:"Fî cîdihâ hablün min mesed", de:"Boynunda hurma lifinden bir ip olduğu hâlde."}
   ]}
 ];
-const TOTAL_AYAT = SURAS.reduce((n,s)=> n + s.ayat.length, 0);
+let TOTAL_AYAT = SURAS.reduce((n,s)=> n + s.ayat.length, 0);
 
 // Letters that never connect to the following letter.
 const NON_CONNECTORS = new Set(["ا","د","ذ","ر","ز","و"]);
@@ -194,7 +194,7 @@ const LESSONS = [
       {g:"نُو", correct:"nû", options:["nû","nu","nâ","nî"]}
     ]}
 ];
-const LESSON_ITEM_COUNT = LESSONS.reduce((n,l)=> n + l.items.length, 0);
+let LESSON_ITEM_COUNT = LESSONS.reduce((n,l)=> n + l.items.length, 0);
 
 // Child-friendly knowledge cards about Ottoman culture. Card i unlocks at
 // i * STORY_STEP stars, so the first one is open right away.
@@ -213,7 +213,7 @@ const STORIES = [
 ];
 const PAGE_COUNT = 10;
 
-const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{} };
+const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{}, extra:{}, days:{} };
 let currentStage = null;
 
 // ---------- Persistence ----------
@@ -335,8 +335,9 @@ function totalStars(){
   const d = countTrue(state.lessons);
   const q = countTrue(state.suraAyat);
   const p = countTrue(state.pages);
-  return {l,f,t,s,d,q,p, stage1:l+f+t, total:l+f+t+s+d+q+p,
-    max: STAGE1_MAX + SYLLABLES.length + LESSON_ITEM_COUNT + TOTAL_AYAT + PAGE_COUNT};
+  const x = typeof extraStars === 'function' ? extraStars() : {n:0, max:0};
+  return {l,f,t,s,d,q,p, x:x.n, stage1:l+f+t, total:l+f+t+s+d+q+p+x.n,
+    max: STAGE1_MAX + SYLLABLES.length + LESSON_ITEM_COUNT + TOTAL_AYAT + PAGE_COUNT + x.max};
 }
 
 function showToast(msg){
@@ -372,9 +373,11 @@ function updateHeader(){
   document.getElementById('moon').style.setProperty('--pct', pct);
   document.getElementById('moonPct').textContent = pct+'%';
   checkMilestone(pct);
+  if(typeof logProgress === 'function') logProgress(total);
   updateStageCards();
   updateStories(total);
   updateLale();
+  if(typeof updateExtras === 'function') updateExtras();
   saveProgress();
 }
 
@@ -603,6 +606,7 @@ function renderFormsView(){
   document.getElementById('formsNote').textContent = NON_CONNECTORS.has(L.g)
     ? 'Bu harf kendisinden sonraki harfe bağlanmaz.'
     : 'Bu harf iki tarafa da bağlanabilir.';
+  if(typeof letterExtra === 'function') document.getElementById('formsExtra').innerHTML = letterExtra(L.g);
 }
 function stepForms(d){
   formsIndex = (formsIndex + d + LETTERS.length) % LETTERS.length;
@@ -825,9 +829,6 @@ let currentPlayBtn = null;
 let playAllSura = null;
 
 function pad3(n){ return String(n).padStart(3,'0'); }
-function audioUrl(surahNum, ayahNum){
-  return 'https://everyayah.com/data/Alafasy_128kbps/'+pad3(surahNum)+pad3(ayahNum)+'.mp3';
-}
 
 function buildSuras(){
   const wrap = document.getElementById('surasWrap');
@@ -842,7 +843,6 @@ function buildSuras(){
       <button class="play-all-btn" id="playall-${si}" onclick="event.stopPropagation(); toggleWholeSura(${si})">▶ Dinle</button></div>`;
     sura.ayat.forEach((a, ai)=>{
       const key = si+'-'+ai;
-      a.audio = audioUrl(sura.num, ai+1);
       const ayahDiv = document.createElement('div');
       ayahDiv.className = 'ayah';
       ayahDiv.innerHTML = `
@@ -908,7 +908,7 @@ function startAyahAudio(si, ai, onDone){
   const btn = document.getElementById('play-'+key);
   const errEl = document.getElementById('err-'+key);
   if(errEl) errEl.style.display = 'none';
-  const audio = new Audio(SURAS[si].ayat[ai].audio);
+  const audio = new Audio(ayahAudioUrl(si, ai));
   currentAudio = audio;
   currentPlayBtn = btn;
   if(btn) btn.classList.add('playing');
@@ -1078,6 +1078,7 @@ async function init(){
   syllableQuiz.load();
   buildLessons();
   buildStories();
+  if(typeof buildExtras === 'function') buildExtras();
   buildSuras();
   buildPages();
   updateHeader();
@@ -1089,7 +1090,8 @@ async function init(){
   }
   document.getElementById('appRoot').classList.add('ready');
 }
-init();
+// Run after extra.js has loaded and added its content.
+document.addEventListener('DOMContentLoaded', init);
 
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
   window.addEventListener('load', ()=>{

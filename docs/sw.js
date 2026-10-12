@@ -1,7 +1,7 @@
 // App shell is served network-first (so updates arrive immediately) with a
 // cache fallback for offline use. Fonts are cached after first load.
-const CACHE = 'humanur-v5';
-const SHELL = ['./', 'index.html', 'style.css', 'script.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'elifba.html'];
+const CACHE = 'humanur-v6';
+const SHELL = ['./', 'index.html', 'style.css', 'script.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'extra.js'];
 
 self.addEventListener('install', e=>{
   e.waitUntil(caches.open(CACHE).then(c=> c.addAll(SHELL)).then(()=> self.skipWaiting()));
