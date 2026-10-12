@@ -3,7 +3,7 @@ services:
     name: humanur-kuran-yolculugu
     runtime: static
     buildCommand: ""
-    staticPublishPath: .
+    staticPublishPath: docs
     pullRequestPreviewsEnabled: false
     routes:
       - type: rewrite
