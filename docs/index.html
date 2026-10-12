@@ -144,17 +144,8 @@
       </div>
     </div>
 
-    <a class="stage-node story-node elifba-link" href="elifba.html">
-      <div class="stage-badge">🤲</div>
-      <div class="stage-body">
-        <h3>Elif-Ba Yolculuğu</h3>
-        <p>Dualar, namaz ve abdest, Esmâ'ül Hüsnâ, kıssalar, sahâbe, âlimler ve özel günler</p>
-        <div class="stage-stars">Aç →</div>
-      </div>
-    </a>
-
     <div class="info-box">
-      <b>Ebeveynler için not:</b> Harfleri, heceleri ve âyetleri lütfen birlikte yüksek sesle tekrar edin — mümkünse bir ebeveyn, hoca veya DITIB Kur'an kursu öğretmeni eşliğinde, çünkü doğru telaffuz (tecvid) ancak canlı bir rehberlikle tam oturur. Bu uygulamadaki içerikler (harf isimleri, sûre metinleri ve anlamları) genel olarak bilinen ve Diyanet İşleri Başkanlığı'nın yaygın kullanılan meallerine dayanan kaynaklar dikkate alınarak özenle hazırlanmıştır; ancak resmî bir dini danışmanlığın yerini tutmaz. Kesin doğrulama için lütfen bir hocaya veya DITIB Kur'an kursuna danışın. Sûre bölümündeki 🔊 seslendirme, tanınmış kâri Mishary Alafasy'nin okuyuşuyla, everyayah.com açık kaynağından canlı olarak yüklenir; bu nedenle internet bağlantısı gerekir. <span id="persistNote"></span>
+      <b>Ebeveynler için not:</b> Harfleri, heceleri ve âyetleri lütfen birlikte yüksek sesle tekrar edin — mümkünse bir ebeveyn, hoca veya DITIB Kur'an kursu öğretmeni eşliğinde, çünkü doğru telaffuz (tecvid) ancak canlı bir rehberlikle tam oturur. Bu uygulamadaki içerikler (harf isimleri, sûre metinleri ve anlamları) genel olarak bilinen ve Diyanet İşleri Başkanlığı'nın yaygın kullanılan meallerine dayanan kaynaklar dikkate alınarak özenle hazırlanmıştır; ancak resmî bir dini danışmanlığın yerini tutmaz. Kesin doğrulama için lütfen bir hocaya veya DITIB Kur'an kursuna danışın. Sûre bölümündeki 🔊 seslendirme (Mishary Alafasy, Kâbe imamları Sudeys ve Şüreym, Medine imamı Huzeyfî), everyayah.com açık kaynağından canlı olarak yüklenir; bu nedenle internet bağlantısı gerekir. <span id="persistNote"></span>
     </div>
     <button class="reset-btn" type="button" onclick="resetProgress()">İlerlemeyi sıfırla</button>
   </section>
@@ -184,6 +175,7 @@
       </div>
       <div class="forms-boxes" id="formsBoxes"></div>
       <p class="forms-note" id="formsNote"></p>
+      <div id="formsExtra"></div>
       <h3 class="sub-title">Bu hangi harf?</h3>
       <div class="quiz-progress" id="formsQuizProgress"></div>
       <div class="quiz-box">
@@ -263,7 +255,7 @@
       <h2>Sûre Koleksiyoncusu</h2>
       <p>Bir sûreye dokunarak aç. Âyet âyet tekrar et, sonra "ezbere biliyorum" kutucuğunu işaretle.</p>
     </div>
-    <div class="audio-hint">🔊 Seslendirme, Mishary Alafasy'nin okuyuşuyla everyayah.com kaynağından yükleniyor (internet bağlantısı gerekir). Bir âyete tekrar dokunursan ses durur.</div>
+    <div class="audio-hint">🔊 Seslendirme everyayah.com kaynağından yükleniyor (internet bağlantısı gerekir); aşağıdan kâriyi seçebilirsin. Bir âyete tekrar dokunursan ses durur.</div>
     <div id="surasWrap"></div>
   </section>
 
@@ -293,5 +285,6 @@
 </div>
 <div class="toast" id="toast"></div>
 <script src="script.js"></script>
+<script src="extra.js"></script>
 </body>
 </html>

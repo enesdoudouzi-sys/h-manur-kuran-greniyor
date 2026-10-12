@@ -450,4 +450,125 @@
     border-bottom:3px solid var(--iznik-blue);
   }
   main{ padding-top:1.5rem; }
-  a.stage-node{ text-decoration:none; color:inherit; }
+
+  /* ===== Integrated Elif-Ba stations ===== */
+  .map-heading{ display:flex; align-items:center; gap:10px; margin:1.6rem 0 1rem; position:relative; z-index:1; }
+  .map-heading span{ background:var(--sand); padding:0 .6rem 0 0; font-family:'Lalezar'; color:var(--iznik-blue); font-size:1.2rem; }
+  .map-heading::after{ content:""; flex:1; height:22px; background:var(--cini-tile) left center/36px 22px repeat-x; border-radius:6px; opacity:.9; }
+  .ex-node{ border-left-color:var(--iznik-turq); }
+  .ex-node .stage-stars{ color:var(--iznik-turq); }
+
+  .ex-body{ display:flex; flex-direction:column; gap:10px; }
+  .ex-card{
+    background:var(--card); border:1px solid var(--sand-deep); border-radius:16px; padding:.9rem 1rem;
+    box-shadow:inset 0 0 0 4px var(--card), inset 0 0 0 5px rgba(42,157,143,.22);
+  }
+  .ex-card p{ margin:.35rem 0; font-size:.92rem; }
+  .ex-center{ text-align:center; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .ex-label{ font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin:.25rem 0; }
+  .ex-sub{ font-size:.8rem; color:var(--ink-soft); }
+  .ex-ar{ font-size:1.6rem; color:var(--night-2); line-height:1.9; text-align:right; }
+  .ex-ar-lg{ font-size:2.1rem; color:var(--teal); line-height:1.9; }
+  .ex-okunus{ font-size:.9rem; color:var(--teal); font-weight:700; font-style:italic; }
+  .ex-quote{ font-family:'Lalezar'; font-size:1.15rem !important; color:var(--iznik-blue); line-height:1.5; }
+  .ex-row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .ex-grow{ flex:1; min-width:0; display:flex; flex-direction:column; }
+  .ex-nav{ justify-content:center; }
+  .ex-tip{ margin-top:.6rem; background:#FFF6E3; border:1px solid var(--gold-light); border-radius:12px; padding:.6rem .8rem; font-size:.88rem; }
+  #formsExtra .ex-card{ margin-top:.6rem; }
+
+  .chips{ display:flex; gap:6px; flex-wrap:wrap; }
+  .chip{
+    font-family:'Baloo 2'; font-weight:700; font-size:.8rem; padding:.3rem .75rem; border-radius:99px; cursor:pointer;
+    background:var(--sand-deep); color:var(--teal); border:1px solid transparent;
+  }
+  .chip.on{ background:var(--teal); color:var(--sand); }
+  .chip.gold{ background:#FFF1D2; color:#8A6416; }
+  .reciter-chips{ margin-top:.3rem; }
+
+  .ex-learn{
+    align-self:flex-start; font-family:'Baloo 2'; font-weight:800; font-size:.95rem; cursor:pointer;
+    background:var(--gold); color:#fff; border:none; border-radius:14px; padding:.6rem 1.1rem;
+    box-shadow:0 3px 0 #A97F25;
+  }
+  .ex-learn.done{ background:var(--teal-light); color:var(--night-2); box-shadow:none; cursor:default; }
+  .ex-speak{ font-family:'Baloo 2'; font-weight:700; cursor:pointer; background:var(--sand-deep); color:var(--teal); border:none; border-radius:12px; padding:.45rem .9rem; }
+
+  .ex-item{ background:var(--card); border:1px solid var(--sand-deep); border-radius:16px; overflow:hidden; }
+  .ex-item.open{ border-color:var(--gold-light); box-shadow:inset 0 0 0 4px var(--card), inset 0 0 0 5px rgba(204,154,60,.45); }
+  .ex-item-head{
+    width:100%; display:flex; align-items:center; gap:12px; text-align:left; cursor:pointer;
+    background:var(--card); border:none; padding:.75rem .9rem; font-family:'Baloo 2'; color:var(--ink);
+  }
+  .ex-list{ border:1px solid var(--sand-deep); border-radius:16px; }
+  .ex-item-head b{ font-size:1rem; }
+  .ex-item.open .chevron{ transform:rotate(90deg); }
+  .ex-item-head .chevron{ color:var(--gold); transition:transform .2s ease; }
+  .ex-num{
+    flex:none; width:38px; height:38px; display:grid; place-items:center; font-weight:800;
+    background:var(--sand-deep); color:var(--teal); border-radius:20px 20px 8px 8px;
+  }
+  .learned .ex-num, .ex-list.learned .ex-num{ background:var(--teal); color:var(--gold-light); }
+  .ex-item-body{ padding:0 1rem 1rem; display:flex; flex-direction:column; gap:8px; }
+  .ex-mean{ background:#FFF6E3; border-radius:12px; padding:.7rem .9rem; display:flex; flex-direction:column; gap:4px; }
+  .ex-mean p{ margin:0; font-size:.92rem; }
+  .ex-ders{ background:#E7F4F1; border-left:4px solid var(--iznik-turq); border-radius:10px; padding:.7rem .9rem; font-size:.95rem; }
+  .ex-ders b{ display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--iznik-turq); }
+  .ex-story{ display:flex; flex-direction:column; gap:10px; }
+  .ex-story h3{ font-family:'Lalezar'; color:var(--teal); font-size:1.35rem; margin:.4rem 0 0; }
+  .ex-story > p{ font-size:1.02rem; line-height:1.75; margin:0; }
+  .ex-ul{ margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:4px; font-size:.92rem; }
+
+  .ex-step-card{ display:flex; gap:12px; align-items:flex-start; }
+  .ex-step-card b{ display:block; font-size:1rem; }
+  .ex-no{ display:inline-block; font-size:.7rem; font-weight:800; background:#FFF1D2; color:#8A6416; padding:1px 9px; border-radius:99px; }
+  .ex-pic, .pose{ flex:none; width:80px; height:80px; border-radius:20px 20px 10px 10px; background:var(--sand-deep); display:grid; place-items:center; }
+  .ex-pic svg{ width:60px; height:60px; fill:none; stroke:var(--teal); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+  .ex-pic svg .dr{ fill:var(--iznik-blue); stroke:none; }
+  .pose svg{ width:72px; height:72px; fill:none; stroke:var(--teal); stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+  .pose svg circle{ fill:var(--card); }
+  .pose svg .ac{ stroke:var(--gold); }
+
+  .ex-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .ex-name{
+    position:relative; display:flex; flex-direction:column; align-items:center; gap:2px; text-align:center; cursor:pointer;
+    background:var(--card); border:1px solid var(--sand-deep); border-radius:22px 22px 12px 12px; padding:.6rem .4rem .7rem;
+    font-family:'Baloo 2'; color:var(--ink);
+  }
+  .ex-name .arabic{ font-size:1.7rem; color:var(--teal); line-height:1.7; }
+  .ex-name b{ font-size:.9rem; }
+  .ex-name.learned{ background:#EAF6F2; border-color:var(--iznik-turq); }
+  .ex-name.learned::after{ content:"🌷"; position:absolute; top:4px; right:8px; font-size:.85rem; }
+  .ex-name.locked{ opacity:.55; cursor:default; }
+  .ex-k{ font-size:.66rem; font-weight:800; color:var(--gold); }
+  .ex-badge{ font-size:1.8rem; line-height:1.4; }
+  .ex-level{ font-size:3rem; line-height:1.2; }
+  .ex-bar{ width:100%; margin-top:.4rem; }
+  .ex-stats{ flex-wrap:nowrap; }
+  .ex-stats > .ex-card{ flex:1; }
+  .ex-stats-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+
+  .ex-evening{
+    background:linear-gradient(180deg,var(--night) 0%, var(--night-2) 100%); color:var(--sand);
+    border-radius:18px; padding:1rem; display:flex; flex-direction:column; gap:8px; border-bottom:4px solid var(--gold);
+  }
+  .ex-evening h3{ font-family:'Lalezar'; color:var(--gold-light); margin:0; font-size:1.3rem; }
+  .ex-evening p{ margin:0; font-size:.88rem; opacity:.9; }
+  .ex-step-row{ display:flex; gap:6px; }
+  .ex-step{
+    flex:1; display:flex; align-items:center; gap:10px; text-align:left; cursor:pointer; font-family:'Baloo 2'; font-weight:700; font-size:.92rem;
+    background:rgba(255,255,255,.1); color:var(--sand); border:none; border-radius:12px; padding:.55rem .7rem;
+  }
+  .ex-step .cb{ flex:none; width:24px; height:24px; border-radius:50%; border:2px solid rgba(255,255,255,.7); display:grid; place-items:center; }
+  .ex-step.on .cb{ background:var(--gold-light); border-color:var(--gold-light); color:var(--night-2); }
+  .ex-go{ font-family:'Baloo 2'; font-weight:800; font-size:.8rem; cursor:pointer; background:none; border:none; color:var(--gold-light); padding:0 .5rem; }
+
+  .ex-bars{ display:flex; gap:8px; align-items:flex-end; height:110px; }
+  .ex-bars-sm{ height:80px; }
+  .ex-bars div{ flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:4px; min-width:0; }
+  .ex-bars i{ display:block; width:100%; min-height:3px; background:var(--teal); border-radius:6px 6px 0 0; }
+  .ex-bars i.gold{ background:var(--gold); }
+  .ex-bars small{ font-size:.7rem; color:var(--ink-soft); font-weight:700; }
+  .ex-bars em{ font-style:normal; font-size:.72rem; font-weight:800; }
+  .ex-input{ display:block; width:100%; margin:.5rem 0; padding:.6rem .8rem; font:inherit; border:2px solid var(--sand-deep); border-radius:12px; }
+  .ex-err{ color:var(--coral); font-weight:700; margin:.4rem 0 0; }
