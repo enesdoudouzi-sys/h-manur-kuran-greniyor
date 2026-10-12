@@ -253,3 +253,27 @@
   .play-btn:active, .play-all-btn:active{ transform:scale(.94); }
 
   footer{ text-align:center; padding:1.5rem; font-size:.8rem; color:var(--ink-soft); }
+
+  .letter-back .ar-name{ font-size:1rem; margin-left:4px; }
+  .speak-btn{
+    margin-top:4px; width:30px; height:30px; border-radius:50%; border:none;
+    background:var(--sand); color:var(--teal); font-size:.9rem; cursor:pointer;
+  }
+  .speak-btn:active{ transform:scale(.92); }
+  .letter-card:focus-visible, .stage-node:focus-visible, .page-chip:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+  .quiz-opt:disabled{ cursor:default; opacity:.8; }
+  @media (min-width:420px){ .quiz-options{ grid-template-columns:1fr 1fr; } }
+  .sura-count{ font-family:'Baloo 2'; font-size:.75rem; color:var(--ink-soft); font-weight:700; }
+  .sura-count.complete{ font-size:1rem; }
+  .play-error{ display:none; font-size:.75rem; color:var(--coral); margin-top:4px; }
+  .page-chip{ font-family:'Baloo 2'; }
+  .reset-btn{
+    display:block; margin:0 auto; background:none; border:1px solid var(--sand-deep);
+    color:var(--ink-soft); font-family:'Baloo 2'; font-size:.8rem; padding:.35rem .9rem;
+    border-radius:20px; cursor:pointer;
+  }
+  .reset-btn:hover{ border-color:var(--coral); color:var(--coral); }
+  .info-box{ position:relative; z-index:1; }
+  .reset-btn{ position:relative; z-index:1; background:var(--sand); }
