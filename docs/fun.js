@@ -234,6 +234,9 @@ function renderChest(){
       </svg>
       <h3>Hazine Sandığım</h3><div class="ex-sub">${c.got} / ${c.max} hazine toplandı</div>
       <div class="bar-bg ex-bar"><div class="bar-fill" style="width:${Math.round(pct*100)}%"></div></div></div>
+    ${(()=>{ const total = totalStars().total, lv = lvlOf(total), cur = LEVELS[lv], nx = LEVELS[lv+1];
+      return `<div class="ex-card chest-level"><span class="ex-level">${cur[2]}</span><div class="ex-grow"><b>${cur[1]}</b>
+        <span class="ex-sub">${total} yıldız${nx ? ' · sonraki: '+nx[2]+' '+nx[1]+' ('+(nx[0]-total)+' yıldız kaldı)' : ' · en yüksek seviye!'} · 🔥 ${streak()} gün</span></div></div>`; })()}
     <div class="ex-label">🏅 Rozetler · ${c.b}/${BADGES.length}</div>
     <div class="chest-grid">${BADGES.map(b=>{ const ok = b[3](); return `<div class="chest-item ${ok?'got':''}" title="${b[2]}"><span>${ok ? b[1] : '🔒'}</span><small>${b[0]}</small></div>`; }).join('')}</div>
     <div class="ex-label">📜 Osmanlı kartları · ${c.s}/${STORIES.length}</div>
@@ -268,7 +271,7 @@ function initFun(){
   const map = document.getElementById('mapView'), main = document.querySelector('main');
   const extra = [
     {id:'gunluk',  icon:'🌟', title:'Bugünkü Dersim',  desc:'Her gün 8 kısa soru'},
-    {id:'sandik',  icon:'🧰', title:'Hazine Sandığım', desc:'Rozetler, Osmanlı kartları ve çıkartmalar'},
+    {id:'sandik',  icon:'🧰', title:'Hazine Sandığım', desc:'Seviye, rozetler, Osmanlı kartları ve çıkartmalar'},
     {id:'ayarlar', icon:'⚙️', title:'Ayarlar',         desc:'Tema, yazı, ses, günlük hedef ve kâri'}
   ];
   extra.forEach(st=>{
