@@ -136,7 +136,7 @@ function refreshFun(){
     const done = state.days[DK] && state.days[DK].daily;
     d.innerHTML = `<button class="daily-card ${done?'done':''}" type="button" onclick="openStage('gunluk')">
       <span class="daily-ic">${done ? '✅' : '🌟'}</span>
-      <span class="daily-body"><b>Bugünkü dersim</b><span>${done ? 'Tamamlandı! İstersen tekrar çalış.' : '8 kısa soru · yaklaşık 3 dakika'}</span></span>
+      <span class="daily-body"><b>Bugünkü dersim</b><span>${done ? 'Tamamlandı! İstersen tekrar çalış.' : '8–10 kısa soru · zorlandıkların da tekrar gelir'}</span></span>
       <span class="daily-go">${done ? '↻' : 'Başla'}</span></button>`;
   }
   const chest = document.getElementById('stars-sandik');
@@ -158,7 +158,11 @@ function buildDaily(){
   pick(SYLLABLES.map((_, i)=> i), 2).forEach(i=> items.push({q:'Nasıl okunur?', g:SYLLABLES[i].g, correct:SYLLABLES[i].correct, options:SYLLABLES[i].options, store:['syllables', i]}));
   const L = LESSONS[Math.floor(Math.random()*LESSONS.length)], j = Math.floor(Math.random()*L.items.length), it = L.items[j];
   items.push({q:L.title+' · nasıl okunur?', g:it.g, correct:it.correct, options:it.options, store:['lessons', L.id+'-'+j]});
-  daily = {items, i:0, right:0, locked:false};
+  // Weak spots first, then one listening question (more.js)
+  const front = [];
+  if(typeof weakItems === 'function') weakItems(3).map(weakQuestion).filter(Boolean).forEach(x=> front.push(x));
+  if(typeof listenQuestion === 'function') front.push(listenQuestion(pick(LETTERS.map((_, i)=> i), 1)[0]));
+  daily = {items:front.concat(items).slice(0, 10), i:0, right:0, locked:false};
 }
 function renderDaily(){
   const el = document.getElementById('exbody-gunluk');
@@ -173,11 +177,13 @@ function renderDaily(){
   }
   const it = daily.items[daily.i];
   el.innerHTML = `<div class="daily-steps">${daily.items.map((_, k)=> `<i class="${k < daily.i ? 'on' : k === daily.i ? 'cur' : ''}"></i>`).join('')}</div>
-    <div class="quiz-box"><div class="quiz-question">${it.q}</div><div class="quiz-glyph arabic">${it.g}</div>
-    <div class="quiz-options">${shuffle(it.options.slice()).map(o=> `<button class="quiz-opt" type="button" data-o="${o}" onclick="answerDaily(this)">${o}</button>`).join('')}</div>
+    <div class="quiz-box"><div class="quiz-question">${it.q}</div>
+    ${it.listen !== undefined ? `<button type="button" class="listen-btn" onclick="playLetterSound(${it.listen})" aria-label="Dinle">🔊</button>` : `<div class="quiz-glyph arabic">${it.g}</div>`}
+    <div class="quiz-options${it.arOpts ? ' sim-options listen-options' : ''}">${shuffle(it.options.slice()).map(o=> `<button class="quiz-opt${it.arOpts ? ' arabic' : ''}" type="button" data-o="${o}" onclick="answerDaily(this)">${o}</button>`).join('')}</div>
     <div class="quiz-feedback" id="dailyFb"></div></div>`;
   daily.locked = false;
   daily.firstTry = true;
+  if(it.listen !== undefined) setTimeout(()=> playLetterSound(it.listen), 350);
 }
 function answerDaily(btn){
   if(daily.locked) return;
@@ -187,8 +193,9 @@ function answerDaily(btn){
     if(daily.firstTry) daily.right++;
     btn.classList.add('correct');
     celebrate(btn);
-    speakArabic(it.say || it.g);
+    if(it.listen === undefined) speakArabic(it.say || it.g);
     document.getElementById('dailyFb').textContent = randomPraise();
+    if(typeof clearMistake === 'function') clearMistake(...(it.mistake || it.store));
     const [k, id] = it.store;
     if(!state[k][id]){ state[k][id] = true; if(k === 'letters'){ const c = document.getElementById('letter-'+id); if(c) c.classList.add('learned'); } updateHeader(); }
     setTimeout(()=>{
@@ -206,7 +213,8 @@ function answerDaily(btn){
     btn.classList.add('wrong');
     btn.disabled = true;
     feedbackWrong(btn);
-    document.getElementById('dailyFb').textContent = 'Tekrar dene!';
+    if(typeof recordMistake === 'function') recordMistake(...(it.mistake || it.store));
+    document.getElementById('dailyFb').textContent = it.listen !== undefined ? 'Tekrar dinle! 🔊' : 'Tekrar dene!';
   }
 }
 
@@ -276,7 +284,7 @@ function initFun(){
   applySettings();
   const map = document.getElementById('mapView'), main = document.querySelector('main');
   const extra = [
-    {id:'gunluk',  icon:'🌟', title:'Bugünkü Dersim',  desc:'Her gün 8 kısa soru'},
+    {id:'gunluk',  icon:'🌟', title:'Bugünkü Dersim',  desc:'Her gün kısa sorular, zorlandıkların tekrar'},
     {id:'sandik',  icon:'🧰', title:'Hazine Sandığım', desc:'Seviye, rozetler, Osmanlı kartları ve çıkartmalar'},
     {id:'ayarlar', icon:'⚙️', title:'Ayarlar',         desc:'Tema, yazı, ses, günlük hedef ve kâri'}
   ];

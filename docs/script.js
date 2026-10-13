@@ -225,7 +225,7 @@ const STORIES = [
 ];
 const PAGE_COUNT = 10;
 
-const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{}, extra:{}, days:{} };
+const state = { letters:{}, forms:{}, trace:{}, syllables:{}, lessons:{}, suraAyat:{}, pages:{}, extra:{}, days:{}, mistakes:{} };
 let currentStage = null;
 
 // ---------- Persistence ----------
@@ -493,11 +493,13 @@ function makeQuiz(ids, getItems, onCorrect, label){
       celebrate(btn);
       $(ids.feedback).textContent = randomPraise();
       speakArabic(item.say || item.g);
+      if(typeof clearMistake === 'function' && item.kind) clearMistake(item.kind, item.key);
       onCorrect(item);
       setTimeout(()=>{ q.index++; q.render(); }, 1100);
     } else {
       btn.classList.add('wrong');
       if(typeof feedbackWrong === 'function') feedbackWrong(btn);
+      if(typeof recordMistake === 'function' && item.kind) recordMistake(item.kind, item.key);
       btn.disabled = true;
       $(ids.feedback).textContent = 'Tekrar dene!';
     }
@@ -595,6 +597,7 @@ function answerLetterQuiz(isCorrect, idx, btn){
     celebrate(btn);
     feedback.textContent = randomPraise();
     speakArabic(LETTERS[idx].ar);
+    if(typeof clearMistake === 'function') clearMistake('letters', idx);
     if(!state.letters[idx]){
       state.letters[idx] = true;
       document.getElementById('letter-'+idx).classList.add('learned');
@@ -604,6 +607,7 @@ function answerLetterQuiz(isCorrect, idx, btn){
   } else {
     btn.classList.add('wrong');
     if(typeof feedbackWrong === 'function') feedbackWrong(btn);
+    if(typeof recordMistake === 'function') recordMistake('letters', idx);
     btn.disabled = true;
     feedback.textContent = 'Tekrar dene, yapabilirsin!';
   }
@@ -633,7 +637,7 @@ const formsQuiz = makeQuiz(
     const forms = letterForms(L.g);
     const pos = ['ini','med','fin'][Math.floor(Math.random()*3)];
     const others = shuffle(LETTERS.map((_, j)=> j).filter(j=> j !== i)).slice(0,3);
-    return {key:i, g:forms[pos], correct:L.name, say:L.ar, options:[L.name, ...others.map(j=> LETTERS[j].name)]};
+    return {key:i, kind:'forms', g:forms[pos], correct:L.name, say:L.ar, options:[L.name, ...others.map(j=> LETTERS[j].name)]};
   }),
   item=>{ if(!state.forms[item.key]){ state.forms[item.key] = true; updateHeader(); } }
 );
@@ -783,7 +787,7 @@ const tracer = (()=>{
 // ---------- Stage 2: Syllables ----------
 const syllableQuiz = makeQuiz(
   {progress:'quizProgress', glyph:'quizGlyph', options:'quizOptions', feedback:'quizFeedback'},
-  ()=> SYLLABLES.map((x, i)=> ({...x, key:i})),
+  ()=> SYLLABLES.map((x, i)=> ({...x, key:i, kind:'syllables'})),
   item=>{ if(!state.syllables[item.key]){ state.syllables[item.key] = true; updateHeader(); } },
   'Tur'
 );
@@ -792,7 +796,7 @@ const syllableQuiz = makeQuiz(
 let currentLesson = 0;
 const lessonQuiz = makeQuiz(
   {progress:'lessonQuizProgress', glyph:'lessonQuizGlyph', options:'lessonQuizOptions', feedback:'lessonQuizFeedback'},
-  ()=> LESSONS[currentLesson].items.map((x, i)=> ({...x, key:LESSONS[currentLesson].id+'-'+i})),
+  ()=> LESSONS[currentLesson].items.map((x, i)=> ({...x, key:LESSONS[currentLesson].id+'-'+i, kind:'lessons'})),
   item=>{
     if(!state.lessons[item.key]){ state.lessons[item.key] = true; updateLessonTabs(); updateHeader(); }
   }
@@ -1121,6 +1125,7 @@ async function init(){
   }
   if(typeof initElifbePlus === 'function') initElifbePlus();
   if(typeof initChat === 'function') initChat();
+  if(typeof initMore === 'function') initMore();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');

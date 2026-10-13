@@ -5,11 +5,11 @@
 
 const GROUPS = [
   {title:'Öğren',  items:[['letters','Elifbe'],['syllables','Hece'],['lessons','Okuma'],['sohbet','Lale\'ye sor']]},
-  {title:'Kur\'an', items:[['suras','Sûreler'],['dua','Dualar'],['pages','Sayfalar']]},
+  {title:'Kur\'an', items:[['suras','Sûreler'],['dua','Dualar'],['pages','Sayfalar'],['tecvid','Tecvid']]},
   {title:'Keşfet', items:[['ibadet','Namaz'],['esma','Esmâ'],['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['gun','Bugün']]},
-  {title:'Ben',    items:[['sandik','Sandık'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
+  {title:'Ben',    items:[['sandik','Sandık'],['belge','Belgeler'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
 ];
-const NO_BAR = ['gun','veli','ayarlar','sohbet'];
+const NO_BAR = ['gun','veli','ayarlar','sohbet','belge'];
 
 const $id = id=> document.getElementById(id);
 const nodeOf = stage=> document.querySelector('#mapView > .stage-node[data-stage="'+stage+'"]');
@@ -26,6 +26,7 @@ function stageRatio(stage){
       kissa: (exCount('h')+exCount('a'))/(HIK.length+SAH.length),
       hazine: (exCount('m')+exCount('g')+exCount('p'))/(ALIM.length+GOK.length+PAD.length)
     });
+    if(typeof TECVID !== 'undefined') r.tecvid = exCount('t')/TECVID.length;
   }
   if(stage === 'stories') return storiesUnlocked > 0 ? storiesUnlocked/STORIES.length : 0;
   if(stage === 'sandik' && typeof chestCounts === 'function'){ const c = chestCounts(); return c.got/c.max; }

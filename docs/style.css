@@ -980,3 +980,34 @@
   .chat-form{ display:flex; gap:8px; align-items:center; }
   .chat-form .chat-input{ margin:0; flex:1; }
   .chat-foot{ justify-content:space-between; margin-top:6px; flex-wrap:nowrap; }
+
+  /* ===== more.js: listening, ezber, tecvid, certificates, weak spots ===== */
+  .listen-btn{ display:block; margin:10px auto 16px; width:96px; height:96px; border-radius:50%; border:none;
+    background:var(--teal); color:var(--sand); font-size:2.6rem; cursor:pointer; box-shadow:0 6px 0 #0A3F3B; }
+  .listen-btn:active{ transform:translateY(4px); box-shadow:0 2px 0 #0A3F3B; }
+  .listen-options{ grid-template-columns:repeat(2, 1fr) !important; }
+  .ezber-btn{ background:var(--gold) !important; }
+  .ezber-head{ text-align:center; }
+  .ezber-head b{ font-family:'Lalezar'; font-size:1.5rem; color:var(--teal); display:block; }
+  .ezber-level{ display:flex; gap:6px; justify-content:center; margin:8px 0 4px; }
+  .ezber-level i{ width:34px; height:8px; border-radius:6px; background:var(--star-off); }
+  .ezber-level i.on{ background:var(--gold); }
+  .ezber-text{ line-height:2.4; font-size:1.9rem; direction:rtl; text-align:right; flex:1; }
+  .ezber-gap{ font:inherit; font-size:1.4rem; border:none; border-radius:10px; padding:0 8px; margin:0 2px;
+    background:var(--sand-deep); color:var(--gold); cursor:pointer; vertical-align:middle; }
+  .ezber-word.peeked{ color:var(--coral); }
+  .tecvid-rule .chips{ margin-top:8px; }
+  .tecvid-rule.learned{ border-color:var(--teal-light); }
+  .cert-list .chip:disabled, .locked-chip{ opacity:.5; cursor:default; }
+  .cert-name{ display:flex; gap:10px; align-items:center; margin:12px 0; }
+  .cert-name .ex-input{ flex:1; }
+  .cert-wrap{ background:var(--card); border-radius:16px; padding:6px; box-shadow:0 4px 14px rgba(0,0,0,.08); }
+  .cert-wrap canvas{ display:block; width:100%; height:auto; border-radius:12px; }
+  .weak-chip{ background:#FDE3DA; color:#9A3A1F; }
+  #certPrint{ display:none; }
+  @media print{
+    body.print-cert > *:not(#certPrint){ display:none !important; }
+    body.print-cert{ background:#fff !important; }
+    body.print-cert #certPrint{ display:block !important; width:100%; height:auto; }
+    @page{ size:landscape; margin:8mm; }
+  }
