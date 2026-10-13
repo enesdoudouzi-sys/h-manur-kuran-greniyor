@@ -36,19 +36,31 @@ const HAREKE = [
   {mark:"ِ", v:"i"},  // esre (kesra)
   {mark:"ُ", v:"u"}   // ötre (damme)
 ];
+// The first ten letters keep their order so saved syllable stars stay valid;
+// the remaining 18 letters are appended. Heavy (kalın) letters read a/ı/u.
 const SYLLABLE_LETTERS = [
   {g:"ب", c:"b"}, {g:"ت", c:"t"}, {g:"م", c:"m"}, {g:"ن", c:"n"},
   {g:"د", c:"d"}, {g:"ر", c:"r"}, {g:"س", c:"s"}, {g:"ف", c:"f"},
-  {g:"ك", c:"k"}, {g:"ل", c:"l"}
+  {g:"ك", c:"k"}, {g:"ل", c:"l"},
+  {g:"ا", c:"", base:["أ","إ","أ"]}, {g:"ث", c:"s"}, {g:"ج", c:"c"}, {g:"ح", c:"h"},
+  {g:"خ", c:"h", heavy:true}, {g:"ذ", c:"z"}, {g:"ز", c:"z"}, {g:"ش", c:"ş"},
+  {g:"ص", c:"s", heavy:true}, {g:"ض", c:"d", heavy:true}, {g:"ط", c:"t", heavy:true},
+  {g:"ظ", c:"z", heavy:true}, {g:"ع", c:"‘"}, {g:"غ", c:"ğ", heavy:true},
+  {g:"ق", c:"k", heavy:true}, {g:"و", c:"v"}, {g:"ه", c:"h"}, {g:"ي", c:"y"}
 ];
+const syllableReading = (L, k)=> L.c + (L.heavy ? ['a','ı','u'] : ['a','i','u'])[k];
 const SYLLABLES = [];
 SYLLABLE_LETTERS.forEach((L, li)=>{
-  HAREKE.forEach(h=>{
-    const other = SYLLABLE_LETTERS[(li + 1 + Math.floor(Math.random()*(SYLLABLE_LETTERS.length-1))) % SYLLABLE_LETTERS.length];
+  HAREKE.forEach((h, k)=>{
+    const own = [0,1,2].map(j=> syllableReading(L, j));
+    // A distractor from another letter that doesn't read the same (e.g. س/ص both "sa").
+    const others = SYLLABLE_LETTERS.filter((x, j)=> j !== li && !own.includes(syllableReading(x, k)));
+    const other = others[Math.floor(Math.random()*others.length)];
     SYLLABLES.push({
-      g: L.g + h.mark,
-      correct: L.c + h.v,
-      options: [...HAREKE.map(x=> L.c + x.v), other.c + h.v]
+      g: (L.base ? L.base[k] : L.g) + h.mark,
+      correct: own[k],
+      options: [...own, syllableReading(other, k)],
+      letter: li, hareke: k
     });
   });
 });
@@ -389,8 +401,9 @@ function updateStageCards(){
   document.getElementById('stars-suras').textContent = q+' / '+TOTAL_AYAT+' ★';
   document.getElementById('stars-pages').textContent = p+' / '+PAGE_COUNT+' ★';
   setLock('syllables', l/LETTERS.length < 0.3);
-  setLock('lessons', s/SYLLABLES.length < 0.3);
-  setLock('suras', s/SYLLABLES.length < 0.3);
+  // Fixed thresholds: adding syllables must never re-lock what a child already opened.
+  setLock('lessons', s < 9);
+  setLock('suras', s < 9);
   setLock('pages', q < 7);
 
   // Highlight the stage the child should work on next.
@@ -1076,7 +1089,7 @@ function updateLale(){
   if(total === 0) msg = 'Merhaba Hümanur! Ben Lale. 🌷 Hadi harf kartlarıyla başlayalım!';
   else if(total === max) msg = 'Maşallah Hümanur! Bütün yolculuğu tamamladın! Seninle gurur duyuyorum. 🏆🌷';
   else if(l/LETTERS.length < 0.3) msg = 'Harika başladın! Birkaç harf daha öğrenirsen Hece Ustası açılacak.';
-  else if(s/SYLLABLES.length < 0.3) msg = 'Şimdi hecelere geçme zamanı! بَ بِ بُ — ba, bi, bu 🎵';
+  else if(s < 9) msg = 'Şimdi hecelere geçme zamanı! بَ بِ بُ — ba, bi, bu 🎵';
   else if(storiesUnlocked < STORIES.length) msg = 'Yeni bir Osmanlı hikâyesine '+toNext+' yıldız kaldı! 📜';
   else if(stage1 < STAGE1_MAX) msg = 'Biliyor muydun? "Çiz" bölümünde harfleri parmağınla yazabilirsin! ✍️';
   else msg = 'Maşallah Hümanur, çok çalışkansın! Sûrelere devam edelim mi? 📖';
@@ -1106,6 +1119,8 @@ async function init(){
       ? 'İlerleme bu cihazda otomatik olarak kaydedilir.'
       : 'Bu tarayıcıda ilerleme kaydı desteklenmiyor (örn. gizli sekme); sayfa kapanınca yıldızlar sıfırlanır.';
   }
+  if(typeof initElifbePlus === 'function') initElifbePlus();
+  if(typeof initChat === 'function') initChat();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');

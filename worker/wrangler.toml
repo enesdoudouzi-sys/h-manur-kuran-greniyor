@@ -1,0 +1,11 @@
+name = "lale-chat"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Only these pages may call the chat (comma separated).
+ALLOWED_ORIGINS = "https://enesdoudouzi-sys.github.io"
+
+# The API key is a secret, never put it here. Set it with:
+#   npx wrangler secret put ANTHROPIC_API_KEY

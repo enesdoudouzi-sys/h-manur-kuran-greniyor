@@ -262,7 +262,13 @@ function renderSettings(){
     <div class="ex-card"><b>Her gün kaç yıldız?</b>${seg('goal', [[5,'5 ⭐'],[10,'10 ⭐'],[15,'15 ⭐'],[20,'20 ⭐']])}</div>
     <div class="ex-label">Kâri (okuyan)</div>
     <div class="ex-card"><div class="chips reciter-chips">${reciterChips()}</div>
-      <p class="ex-sub">Kâbe imamları: Sudeys, Şüreym, Mâhir el-Muaykılî · Medine imamı: Huzeyfî. Bir kâri yüklenemezse otomatik olarak Mishary Alafasy okur.</p></div>`;
+      <p class="ex-sub">Kâbe imamları: Sudeys, Şüreym, Mâhir el-Muaykılî · Medine imamı: Huzeyfî. Bir kâri yüklenemezse otomatik olarak Mishary Alafasy okur.</p></div>
+    <div class="ex-label">Lale sohbeti (ebeveyn)</div>
+    <div class="ex-card"><b>Sohbet sunucusu adresi</b>
+      <p class="ex-sub">Kurulum: depodaki worker/README.md. claude.ai linkinde adres gerekmez.</p>
+      <input class="ex-input" id="chatUrlInput" type="url" inputmode="url" placeholder="https://lale-chat.….workers.dev"
+        value="${(()=>{ try{ return (localStorage.getItem('humanur-chat-url') || (window.HUMANUR_CONFIG && window.HUMANUR_CONFIG.chatUrl) || '').replace(/"/g,'&quot;'); }catch(e){ return ''; } })()}"
+        onchange="try{ localStorage.setItem('humanur-chat-url', this.value.trim()); }catch(e){} showToast('Adres kaydedildi');"></div>`;
 }
 
 /* ============ Start-up (called from init() before the app shell) ============ */
