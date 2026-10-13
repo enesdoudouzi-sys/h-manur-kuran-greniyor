@@ -85,6 +85,7 @@
   </div>
 
   <section id="mapView" class="journey">
+    <div class="map-heading map-heading-first"><span>Öğrenme Yolu</span></div>
     <div class="path-line"></div>
     <div class="stage-node" data-stage="letters" onclick="openStage('letters')" onkeydown="onStageKey(event,'letters')" role="button" tabindex="0">
       <div class="stage-badge">ا</div>
@@ -144,9 +145,10 @@
       </div>
     </div>
 
-    <div class="info-box">
-      <b>Ebeveynler için not:</b> Harfleri, heceleri ve âyetleri lütfen birlikte yüksek sesle tekrar edin — mümkünse bir ebeveyn, hoca veya DITIB Kur'an kursu öğretmeni eşliğinde, çünkü doğru telaffuz (tecvid) ancak canlı bir rehberlikle tam oturur. Bu uygulamadaki içerikler (harf isimleri, sûre metinleri ve anlamları) genel olarak bilinen ve Diyanet İşleri Başkanlığı'nın yaygın kullanılan meallerine dayanan kaynaklar dikkate alınarak özenle hazırlanmıştır; ancak resmî bir dini danışmanlığın yerini tutmaz. Kesin doğrulama için lütfen bir hocaya veya DITIB Kur'an kursuna danışın. Sûre bölümündeki 🔊 seslendirme (Mishary Alafasy, Kâbe imamları Sudeys ve Şüreym, Medine imamı Huzeyfî), everyayah.com açık kaynağından canlı olarak yüklenir; bu nedenle internet bağlantısı gerekir. <span id="persistNote"></span>
-    </div>
+    <details class="info-box">
+      <summary><b>Ebeveynler için not</b></summary>
+      Harfleri, heceleri ve âyetleri lütfen birlikte yüksek sesle tekrar edin — mümkünse bir ebeveyn, hoca veya DITIB Kur'an kursu öğretmeni eşliğinde, çünkü doğru telaffuz (tecvid) ancak canlı bir rehberlikle tam oturur. Bu uygulamadaki içerikler (harf isimleri, sûre metinleri ve anlamları) genel olarak bilinen ve Diyanet İşleri Başkanlığı'nın yaygın kullanılan meallerine dayanan kaynaklar dikkate alınarak özenle hazırlanmıştır; ancak resmî bir dini danışmanlığın yerini tutmaz. Kesin doğrulama için lütfen bir hocaya veya DITIB Kur'an kursuna danışın. Sûre bölümündeki 🔊 seslendirme (Mishary Alafasy, Kâbe imamları Sudeys ve Şüreym, Medine imamı Huzeyfî), everyayah.com açık kaynağından canlı olarak yüklenir; bu nedenle internet bağlantısı gerekir. <span id="persistNote"></span>
+    </details>
     <button class="reset-btn" type="button" onclick="resetProgress()">İlerlemeyi sıfırla</button>
   </section>
 

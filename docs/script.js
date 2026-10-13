@@ -425,7 +425,7 @@ function openStage(stage){
 function closeStage(){
   stopAudio();
   if(currentStage) document.getElementById('panel-'+currentStage).classList.remove('open');
-  document.getElementById('mapView').style.display = 'block';
+  document.getElementById('mapView').style.display = '';
   document.getElementById('laleGuide').style.display = '';
   currentStage = null;
 }
