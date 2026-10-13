@@ -11,7 +11,7 @@ const TABS = [
   {id:'explore', label:'Keşfet',    icon:'<svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7Z"/></svg>', title:'Keşfet', sub:'İbadet, hikâyeler ve bilgiler',
    stages:['gun','ibadet','esma','kissa','hazine','stories']},
   {id:'me',      label:'Ben',       icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>', title:'Ben', sub:'Ödüller ve ebeveyn alanı',
-   stages:['oduller','veli']}
+   stages:['oduller','sandik','veli','ayarlar']}
 ];
 let currentTab = 'home';
 try{ const t = sessionStorage.getItem('humanur-tab'); if(TABS.some(x=> x.id===t)) currentTab = t; }catch(e){}
@@ -45,7 +45,8 @@ function initShell(){
   const bar = document.createElement('div');
   bar.className = 'appbar-row';
   bar.innerHTML = `<div class="appbar-brand"><span class="appbar-logo">☾</span><span>Hümanur'un Yolculuğu</span></div>
-    <button class="starpill" type="button" onclick="showTab('me')" aria-label="Yıldızlarım"><span>⭐</span><b id="starCount">0</b></button>`;
+    <span class="streakpill" title="Gün serisi">🔥 <b id="streakCount">0</b></span>
+    <button class="starpill" type="button" onclick="openStage('sandik')" aria-label="Hazine sandığım"><span>⭐</span><b id="starCount">0</b></button>`;
   header.prepend(bar);
 
   // Tab views inside the map
@@ -64,11 +65,13 @@ function initShell(){
   hero.className = 'home-hero';
   hero.innerHTML = `<div class="hero-greet"><span class="hero-moon">🌙</span><div><h2>Selâmün aleyküm, Hümanur!</h2><p>Her gün biraz öğren, her gün bir yıldız kazan.</p></div></div>`;
   hero.appendChild(document.querySelector('header .moon-wrap'));
+  hero.insertAdjacentHTML('beforeend', '<div class="home-goal" id="homeGoal"></div>');
   const sky = document.querySelector('header .skyline');
   if(sky) hero.appendChild(sky);
   views.home.appendChild(hero);
   views.home.appendChild($id('laleGuide'));
   views.home.insertAdjacentHTML('beforeend', `
+    <div id="homeDaily"></div>
     <div id="homeContinue"></div>
     <div class="sec-title">Bugün</div><div id="homeToday"></div>
     <div class="sec-title">Hızlı erişim</div><div class="quick-grid" id="homeQuick"></div>`);
@@ -79,7 +82,7 @@ function initShell(){
     if(!n) return;
     n.classList.add('list-card');
     const body = n.querySelector('.stage-body');
-    if(body && !body.querySelector('.card-bar') && st !== 'gun' && st !== 'oduller' && st !== 'veli'){
+    if(body && !body.querySelector('.card-bar') && !['gun','oduller','veli','sandik','ayarlar'].includes(st)){
       body.insertAdjacentHTML('beforeend', '<div class="card-bar"><i></i></div>');
     }
     if(!n.querySelector('.card-chev')) n.insertAdjacentHTML('beforeend', '<span class="card-chev">›</span>');
@@ -146,6 +149,7 @@ function refreshShell(){
       <div class="today-foot"><span>🍽️ Akşam Sofrası ${ev}/5</span><span class="cc-go">›</span></div></button>`;
   }
   // Quick access
+  if(typeof refreshFun === 'function') refreshFun();
   const quick = [['suras','📖','Sûreler'],['dua','🤲','Dualar'],['esma','✨','Esmâ'],['kissa','🌙','Hikâyeler']];
   $id('homeQuick').innerHTML = quick.map(([st, ic, l])=>{
     const n = nodeOf(st), locked = n && n.classList.contains('locked');

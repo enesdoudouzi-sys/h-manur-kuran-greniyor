@@ -484,6 +484,7 @@ function makeQuiz(ids, getItems, onCorrect, label){
       setTimeout(()=>{ q.index++; q.render(); }, 1100);
     } else {
       btn.classList.add('wrong');
+      if(typeof feedbackWrong === 'function') feedbackWrong(btn);
       btn.disabled = true;
       $(ids.feedback).textContent = 'Tekrar dene!';
     }
@@ -589,6 +590,7 @@ function answerLetterQuiz(isCorrect, idx, btn){
     setTimeout(()=>{ letterQuizIndex++; renderLetterQuiz(); }, 1100);
   } else {
     btn.classList.add('wrong');
+    if(typeof feedbackWrong === 'function') feedbackWrong(btn);
     btn.disabled = true;
     feedback.textContent = 'Tekrar dene, yapabilirsin!';
   }
@@ -745,8 +747,10 @@ const tracer = (()=>{
       document.getElementById('traceName').textContent = LETTERS[index].name + ' ★';
     } else if(precision < 0.7){
       fb.textContent = 'Çizgilerin harfin dışına taştı. Silip tekrar dene!';
+      if(typeof feedbackWrong === 'function') feedbackWrong(ink);
     } else {
       fb.textContent = 'Harfin tamamını çiz. Biraz daha!';
+      if(typeof feedbackWrong === 'function') feedbackWrong(ink);
     }
   }
   return {
@@ -923,9 +927,22 @@ function startAyahAudio(si, ai, onDone){
     if(onDone) onDone(ok);
   };
   audio.onended = ()=> finish(true);
-  audio.onerror = ()=> finish(false);
+  // If the chosen reciter can't be loaded, fall back to Mishary Alafasy once.
+  let retried = false;
+  const fail = ()=>{
+    if(!retried && typeof reciter !== 'undefined' && reciter !== 0 && currentAudio === audio){
+      retried = true;
+      showToast('Bu kâri yüklenemedi, Mishary Alafasy okuyor.');
+      audio.src = ayahAudioUrl(si, ai, 0);
+      const p2 = audio.play();
+      if(p2 && p2.catch) p2.catch(()=> finish(false));
+      return;
+    }
+    finish(false);
+  };
+  audio.onerror = fail;
   const p = audio.play();
-  if(p && p.catch) p.catch(()=> finish(false));
+  if(p && p.catch) p.catch(fail);
 }
 
 function playAyah(si, ai){
@@ -1089,6 +1106,7 @@ async function init(){
       ? 'İlerleme bu cihazda otomatik olarak kaydedilir.'
       : 'Bu tarayıcıda ilerleme kaydı desteklenmiyor (örn. gizli sekme); sayfa kapanınca yıldızlar sıfırlanır.';
   }
+  if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');
 }

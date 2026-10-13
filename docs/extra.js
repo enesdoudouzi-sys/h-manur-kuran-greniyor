@@ -353,20 +353,24 @@ const RECITERS = [
   ['Alafasy_128kbps','Mishary Alafasy'],
   ['Abdurrahmaan_As-Sudais_192kbps','Şeyh Sudeys (Kâbe)'],
   ['Saood_ash-Shuraym_128kbps','Şeyh Şüreym (Kâbe)'],
-  ['Hudhaify_128kbps','Şeyh Huzeyfî (Medine)']
+  ['Hudhaify_128kbps','Şeyh Huzeyfî (Medine)'],
+  ['MaherAlMuaiqly128kbps','Şeyh Mâhir el-Muaykılî (Kâbe)']
 ];
+// Display order: Alafasy, the three Kâbe imams, then Medine (indices stay stable for saved choices).
+const RECITER_ORDER = [0, 1, 2, 4, 3];
 let reciter = 0;
 try{ reciter = Math.min(RECITERS.length-1, Math.max(0, +localStorage.getItem('humanur-reciter') || 0)); }catch(e){}
-function recitationUrl(sura, ayah){
-  return 'https://everyayah.com/data/'+RECITERS[reciter][0]+'/'+pad3(sura)+pad3(ayah)+'.mp3';
+function recitationUrl(sura, ayah, who){
+  const r = RECITERS[who === undefined ? reciter : who] || RECITERS[0];
+  return 'https://everyayah.com/data/'+r[0]+'/'+pad3(sura)+pad3(ayah)+'.mp3';
 }
-function ayahAudioUrl(si, ai){
+function ayahAudioUrl(si, ai, who){
   const s = SURAS[si];
-  return s.audioRef ? recitationUrl(s.audioRef[0], s.audioRef[1]) : recitationUrl(s.num, ai+1);
+  return s.audioRef ? recitationUrl(s.audioRef[0], s.audioRef[1], who) : recitationUrl(s.num, ai+1, who);
 }
 function reciterChips(){
-  return RECITERS.map((r, i)=>
-    `<button class="chip ${i===reciter?'on':''}" type="button" onclick="setReciter(${i})">${r[1]}</button>`).join('');
+  return RECITER_ORDER.map(i=>
+    `<button class="chip ${i===reciter?'on':''}" type="button" onclick="setReciter(${i})">${RECITERS[i][1]}</button>`).join('');
 }
 function setReciter(i){
   reciter = i;
@@ -383,7 +387,20 @@ function playRef(sura, ayah){
   stopAudio();
   const audio = new Audio(recitationUrl(sura, ayah));
   currentAudio = audio;
-  const fail = ()=>{ if(currentAudio === audio){ currentAudio = null; showToast('Ses yüklenemedi. İnternet bağlantını kontrol et.'); } };
+  let retried = false;
+  const fail = ()=>{
+    if(currentAudio !== audio) return;
+    if(!retried && reciter !== 0){
+      retried = true;
+      showToast('Bu kâri yüklenemedi, Mishary Alafasy okuyor.');
+      audio.src = recitationUrl(sura, ayah, 0);
+      const p2 = audio.play();
+      if(p2 && p2.catch) p2.catch(()=>{ currentAudio = null; });
+      return;
+    }
+    currentAudio = null;
+    showToast('Ses yüklenemedi. İnternet bağlantını kontrol et.');
+  };
   audio.onended = ()=>{ if(currentAudio === audio) currentAudio = null; };
   audio.onerror = fail;
   const p = audio.play();
