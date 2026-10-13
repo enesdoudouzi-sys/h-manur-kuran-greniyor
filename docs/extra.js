@@ -810,6 +810,8 @@ function vVeli(){
     <div class="ex-card"><div class="ex-bars">${week.map(w=> `<div><em>${w.n}</em><i style="height:${Math.round(w.n/mx*70)}%"></i><small>${w.lab}</small></div>`).join('')}</div></div>
     <div class="ex-label">Akşam Sofrası · adım</div>
     <div class="ex-card"><div class="ex-bars ex-bars-sm">${week.map(w=> `<div><em>${w.ev}</em><i class="gold" style="height:${Math.round(w.ev/5*60)}%"></i><small>${w.lab}</small></div>`).join('')}</div></div>
+    <div class="ex-label">Zorlandıkları</div>
+    <div class="ex-card">${(()=>{ const w = typeof weakItems === 'function' ? weakItems(12) : []; return w.length ? `<div class="chips">${w.map(k=> `<span class="chip weak-chip">${weakLabel(k)} · ${state.mistakes[k]}×</span>`).join('')}</div><p class="ex-sub">Bunlar "Bugünkü dersim"de tekrar sorulur; doğru bildikçe listeden çıkar.</p>` : '<p>Şu an zorlandığı bir şey yok. 👏</p>'; })()}</div>
     <div class="ex-label">Sırada ezberlenecekler</div>
     <div class="ex-card">${left.length ? `<div class="chips">${left.map(x=> `<span class="chip gold">${x}</span>`).join('')}</div>` : '<p>Tüm sûre ve dualar tamamlandı. Maşallah!</p>'}</div>
     <div class="ex-row"><button class="ex-learn" type="button" onclick="copySummary()">Özeti kopyala</button><button class="reset-btn" type="button" onclick="resetProgress()">İlerlemeyi sıfırla</button></div>
