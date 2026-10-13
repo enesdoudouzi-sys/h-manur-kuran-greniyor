@@ -4,12 +4,12 @@
 // script.js / extra.js / fun.js; loaded last and started from init().
 
 const GROUPS = [
-  {title:'Öğren',  items:[['letters','Elifbe'],['syllables','Hece'],['lessons','Okuma']]},
+  {title:'Öğren',  items:[['letters','Elifbe'],['syllables','Hece'],['lessons','Okuma'],['sohbet','Lale\'ye sor']]},
   {title:'Kur\'an', items:[['suras','Sûreler'],['dua','Dualar'],['pages','Sayfalar']]},
   {title:'Keşfet', items:[['ibadet','Namaz'],['esma','Esmâ'],['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['gun','Bugün']]},
   {title:'Ben',    items:[['sandik','Sandık'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
 ];
-const NO_BAR = ['gun','veli','ayarlar'];
+const NO_BAR = ['gun','veli','ayarlar','sohbet'];
 
 const $id = id=> document.getElementById(id);
 const nodeOf = stage=> document.querySelector('#mapView > .stage-node[data-stage="'+stage+'"]');

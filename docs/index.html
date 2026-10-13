@@ -219,7 +219,7 @@
     <button class="back-btn" onclick="closeStage()">← Yolculuğa dön</button>
     <div class="panel-header">
       <h2>Hece Ustası</h2>
-      <p>Bu işarete hangi ses uyuyor? Üstün (َ) → a, esre (ِ) → i, ötre (ُ) → u. Doğru cevaptan sonra hece seslendirilir.</p>
+      <p>Bu işarete hangi ses uyuyor? Üstün <span class="arabic">بَ</span> → a, esre <span class="arabic">بِ</span> → i, ötre <span class="arabic">بُ</span> → u. Kalın harflerde esre ı okunur: <span class="arabic">صِ</span> → sı.</p>
     </div>
     <div class="quiz-progress" id="quizProgress"></div>
     <div class="quiz-box">
@@ -286,9 +286,12 @@
 <footer><div class="footer-tiles" aria-hidden="true"></div>Yolculukta bol keyif, Hümanur! 🌙</footer>
 </div>
 <div class="toast" id="toast"></div>
+<script src="config.js"></script>
 <script src="script.js"></script>
 <script src="extra.js"></script>
 <script src="voice.js"></script>
+<script src="elifbe-plus.js"></script>
+<script src="chat.js"></script>
 <script src="fun.js"></script>
 <script src="app.js"></script>
 </body>
