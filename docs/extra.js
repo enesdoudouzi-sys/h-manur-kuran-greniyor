@@ -568,9 +568,9 @@ function updateExtras(){
   set('kissa', (exCount('h')+exCount('a'))+' / '+(HIK.length+SAH.length)+' ★');
   set('hazine', (exCount('m')+exCount('g')+exCount('p'))+' / '+(ALIM.length+GOK.length+PAD.length)+' ★');
   const lv = LEVELS[lvlOf(totalStars().total)];
-  set('oduller', lv[2]+' '+lv[1]+' · 🔥 '+streak()+' gün');
+  set('oduller', lv[2]+' 🔥 '+streak()+' gün');
   const oz = ozList()[0], d = state.days[DK];
-  set('gun', 'Akşam Sofrası '+(d ? d.s.filter(Boolean).length : 0)+'/5'+(oz ? ' · '+oz.n+': '+leftTxt(oz.left) : ''));
+  set('gun', '🍽️ '+(d ? d.s.filter(Boolean).length : 0)+'/5'+(oz ? ' · 🌙 '+leftTxt(oz.left) : ''));
   set('veli', 'Yetişkinler için');
   // keep open panels fresh, but don't redraw the one being interacted with
   ['oduller','veli'].forEach(id=>{ if(currentStage !== id) renderExtra(id); });
