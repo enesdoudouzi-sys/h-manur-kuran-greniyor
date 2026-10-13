@@ -1089,6 +1089,7 @@ async function init(){
       ? 'İlerleme bu cihazda otomatik olarak kaydedilir.'
       : 'Bu tarayıcıda ilerleme kaydı desteklenmiyor (örn. gizli sekme); sayfa kapanınca yıldızlar sıfırlanır.';
   }
+  if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');
 }
 // Run after extra.js has loaded and added its content.

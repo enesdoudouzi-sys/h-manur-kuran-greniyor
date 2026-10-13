@@ -627,3 +627,139 @@
     #mapView .stage-node{ grid-column:span 2; }
     #mapView .ex-node, #mapView .story-node{ grid-column:span 2; }
   }
+
+  /* ================= Modern app design ================= */
+  body.modern{
+    --bg:#F5F3EE; --surface:#FFFFFF; --line:#ECE6DA; --shadow:0 2px 12px rgba(18,48,44,.07);
+    background:var(--bg);
+  }
+  body.modern main{ padding:0 16px 110px; max-width:640px; }
+  body.modern footer{ display:none; }
+
+  /* App bar */
+  body.modern header{
+    position:sticky; top:0; z-index:40; padding:10px 16px; border-bottom:0; text-align:left;
+    background:var(--teal); box-shadow:0 2px 10px rgba(0,0,0,.12);
+  }
+  body.modern header::before{ opacity:.12; }
+  body.modern header > .brand-mark, body.modern header > h1, body.modern header > p{ display:none; }
+  .appbar-row{ position:relative; z-index:1; display:flex; align-items:center; gap:10px; max-width:640px; margin:0 auto; }
+  .appbar-brand{ flex:1; display:flex; align-items:center; gap:8px; font-family:'Baloo 2'; font-weight:800; font-size:1.05rem; color:#fff; min-width:0; }
+  .appbar-brand span:last-child{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .appbar-logo{ display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:rgba(255,255,255,.15); color:var(--gold-light); font-size:1.2rem; }
+  .starpill{ display:flex; align-items:center; gap:5px; background:rgba(255,255,255,.16); color:#fff; border:none; border-radius:99px; padding:6px 12px; font-family:'Baloo 2'; font-size:.95rem; cursor:pointer; }
+  .starpill b{ font-variant-numeric:tabular-nums; }
+  body.modern .cini-band{ height:8px; background-size:24px 14px; border-bottom-width:2px; opacity:.85; }
+  body.modern .save-indicator{ top:auto; bottom:92px; right:16px; }
+
+  /* Tabs */
+  body.modern #mapView.journey{ display:block; padding:16px 0 0; }
+  .tabview{ display:none; }
+  .tabview.active{ display:flex; flex-direction:column; gap:12px; animation:panelIn .25s ease; }
+  .tab-head h2{ font-family:'Baloo 2'; font-weight:800; font-size:1.6rem; color:var(--ink); margin:4px 0 0; }
+  .tab-head p{ margin:0 0 4px; color:var(--ink-soft); font-size:.92rem; }
+  .sec-title{ font-family:'Baloo 2'; font-weight:800; font-size:1.05rem; color:var(--ink); margin:8px 2px -2px; }
+
+  /* Home hero */
+  .home-hero{
+    position:relative; overflow:hidden; border-radius:24px; padding:18px 18px 0;
+    background:linear-gradient(160deg, var(--teal) 0%, var(--night) 100%); color:#fff; box-shadow:var(--shadow);
+  }
+  .hero-greet{ display:flex; gap:12px; align-items:flex-start; position:relative; z-index:1; }
+  .hero-moon{ font-size:1.7rem; }
+  .hero-greet h2{ font-family:'Baloo 2'; font-weight:800; font-size:1.3rem; margin:0; color:#fff; line-height:1.2; }
+  .hero-greet p{ margin:2px 0 0; opacity:.85; font-size:.9rem; }
+  .home-hero .moon-wrap{ position:relative; z-index:1; margin:14px 0 4px; max-width:none; }
+  .home-hero .skyline{ display:block; width:calc(100% + 36px); height:64px; margin:0 -18px; opacity:.55; }
+  .home-hero .skyline g:first-of-type{ fill:#082623; }
+
+  /* Lale on home */
+  body.modern .lale-guide{ margin:0; background:var(--surface); border-radius:20px; padding:10px 12px; box-shadow:var(--shadow); align-items:center; }
+  body.modern .lale-bubble{ border:none; box-shadow:none; padding:4px 2px; background:none; }
+  body.modern .lale-bubble::before{ display:none; }
+
+  /* Continue + today cards */
+  .continue-card, .today-card{
+    width:100%; display:flex; align-items:center; gap:14px; text-align:left; cursor:pointer;
+    background:var(--surface); border:none; border-radius:20px; padding:14px 16px; box-shadow:var(--shadow);
+    font-family:'Baloo 2'; color:var(--ink);
+  }
+  .continue-card{ border:2px solid var(--gold-light); }
+  .continue-card.done{ cursor:default; }
+  .cc-badge{ flex:none; width:54px; height:54px; border-radius:18px; display:grid; place-items:center; font-size:1.7rem; background:var(--sand-deep); color:var(--teal); }
+  .cc-body{ flex:1; min-width:0; display:flex; flex-direction:column; gap:3px; }
+  .cc-body b{ font-size:1.1rem; }
+  .cc-kicker{ font-size:.72rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--gold); }
+  .cc-go{ font-size:1.8rem; color:var(--teal); line-height:1; }
+  .today-card{ flex-direction:column; align-items:stretch; gap:6px; }
+  .today-ar{ font-size:1.7rem; color:var(--teal); line-height:1.8; text-align:right; }
+  .today-card p{ margin:0; font-size:.92rem; color:var(--ink-soft); }
+  .today-foot{ display:flex; justify-content:space-between; align-items:center; font-size:.85rem; font-weight:700; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:8px; }
+  .quick-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .quick-btn{
+    display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer; border:none; background:var(--surface);
+    border-radius:18px; padding:12px 4px; box-shadow:var(--shadow); font-family:'Baloo 2'; font-weight:700; font-size:.8rem; color:var(--ink);
+  }
+  .quick-ic{ width:42px; height:42px; border-radius:14px; display:grid; place-items:center; font-size:1.3rem; background:var(--sand-deep); }
+  .quick-btn.locked{ opacity:.55; }
+
+  /* List cards (the former map nodes) */
+  body.modern #mapView .stage-node.list-card{
+    grid-column:auto; flex-direction:row; align-items:center; text-align:left; gap:14px; margin:0;
+    padding:14px 14px; border:none; border-radius:20px; background:var(--surface); box-shadow:var(--shadow);
+  }
+  body.modern #mapView .list-card .stage-badge{
+    width:54px; height:54px; border-radius:18px; font-size:1.6rem; box-shadow:none; background:var(--sand-deep);
+  }
+  body.modern #mapView .list-card .stage-badge::before{ display:none; }
+  body.modern #mapView .list-card.active{ box-shadow:0 0 0 2px var(--gold-light), var(--shadow); }
+  body.modern #mapView .list-card.active .stage-badge{ background:var(--teal); color:var(--gold-light); }
+  body.modern #mapView .list-card .stage-body{ align-items:stretch; }
+  body.modern #mapView .list-card h3{ font-family:'Baloo 2'; font-weight:800; font-size:1.02rem; }
+  body.modern #mapView .list-card .stage-body p{ display:block; font-size:.82rem; color:var(--ink-soft); margin:1px 0 0; line-height:1.35; }
+  body.modern #mapView .list-card .stage-stars{ font-size:.75rem; margin-top:4px; color:var(--gold); }
+  body.modern #mapView .list-card.locked{ opacity:.6; }
+  body.modern #mapView .list-card .lock-icon{ position:static; font-size:1.1rem; }
+  .card-chev{ color:var(--ink-soft); font-size:1.6rem; line-height:1; opacity:.6; }
+  body.modern #mapView .list-card.locked .card-chev{ display:none; }
+  .card-bar{ height:6px; background:var(--sand-deep); border-radius:99px; overflow:hidden; margin-top:6px; }
+  .card-bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg, var(--teal), var(--iznik-turq)); border-radius:99px; transition:width .5s ease; }
+  body.modern details.info-box{ background:var(--surface); box-shadow:var(--shadow); border-radius:20px; margin:4px 0 0; }
+  body.modern #view-me .reset-btn{ margin-top:4px; }
+
+  /* Panels */
+  body.modern .panel{ padding-top:12px; }
+  body.modern .back-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--surface); border-radius:99px; padding:.35rem .9rem .35rem .45rem;
+    box-shadow:var(--shadow); color:var(--teal); font-size:.92rem;
+  }
+  .back-ico{ display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--teal); color:#fff; font-size:1.2rem; line-height:1; }
+  body.modern .panel-header h2{ font-family:'Baloo 2'; font-weight:800; font-size:1.55rem; color:var(--ink); }
+  body.modern .panel-header::after{ height:10px; margin-top:.5rem; background-size:24px 14px, calc(50% - 18px) 1px, calc(50% - 18px) 1px; opacity:.7; }
+  body.modern .tabbar .tab-btn{ border-radius:99px; border:none; background:var(--surface); box-shadow:var(--shadow); }
+  body.modern .tabbar .tab-btn.active{ background:var(--teal); }
+  body.modern .quiz-box, body.modern .lesson-card, body.modern .ex-card, body.modern .ayah, body.modern .ex-item,
+  body.modern .ex-list, body.modern .sura-title, body.modern .letter-face, body.modern .form-box, body.modern .story-card{
+    border-color:transparent; box-shadow:var(--shadow);
+  }
+  body.modern .quiz-box, body.modern .lesson-card{ border-radius:22px; }
+  body.modern .quiz-opt{ border-radius:16px; background:var(--surface); border:2px solid var(--line); font-weight:700; padding:.8rem; }
+  body.modern .ayah{ border-radius:20px; background:var(--surface); }
+  body.modern .sura-title{ border-left:none; border-radius:18px; }
+  body.modern .toast{ bottom:92px; border-radius:16px; }
+
+  /* Bottom navigation */
+  .tabbar-bottom{
+    position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; justify-content:center; gap:2px;
+    padding:6px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    background:rgba(255,255,255,.94); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-top:1px solid var(--line); box-shadow:0 -4px 16px rgba(18,48,44,.06);
+  }
+  .tabbar-bottom button{
+    flex:1; max-width:120px; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer;
+    background:none; border:none; padding:6px 2px 4px; border-radius:14px; font-family:'Baloo 2'; font-weight:700; font-size:.7rem; color:var(--ink-soft);
+  }
+  .tabbar-bottom svg{ width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .tab-ar{ font-size:1.45rem; line-height:24px; height:24px; }
+  .tabbar-bottom button.active{ color:var(--teal); }
+  .tabbar-bottom button.active svg, .tabbar-bottom button.active .tab-ar{ background:#E3F1EE; border-radius:99px; padding:2px 14px; box-sizing:content-box; }
