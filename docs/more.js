@@ -321,8 +321,11 @@ function renderCert(){
   if(!el) return;
   const list = certAchievements(), got = list.filter(a=> a.ok);
   if(!certSel || !got.some(a=> a.id === certSel)) certSel = got.length ? got[0].id : null;
-  el.innerHTML = `<p class="tab-hint">Bir başarı seç, belgeyi indir veya yazdır. Henüz kazanılmayanlarda 🔒 var.</p>
-    <div class="chips cert-list">${list.map(a=> `<button type="button" class="chip ${a.ok ? (a.id === certSel ? 'on' : '') : 'locked-chip'}" ${a.ok ? `onclick="certSel='${a.id}';renderCert()"` : 'disabled'}>${a.ok ? '🏅' : '🔒'} ${a.title}</button>`).join('')}</div>
+  const locked = list.filter(a=> !a.ok);
+  el.innerHTML = `<p class="tab-hint">${got.length ? 'Bir başarı seç, belgeyi indir veya yazdır.' : 'Henüz belge yok. İlk belgen Elifbe\'yi bitirince açılır.'}</p>
+    ${got.length ? `<div class="chips cert-list">${got.map(a=> `<button type="button" class="chip ${a.id === certSel ? 'on' : ''}" onclick="certSel='${a.id}';renderCert()">🏅 ${a.title}</button>`).join('')}</div>` : ''}
+    ${locked.length ? `<details class="cert-more"><summary>🔒 Kazanılacak ${locked.length} belge daha</summary>
+      <div class="chips cert-list">${locked.map(a=> `<span class="chip locked-chip">🔒 ${a.title}</span>`).join('')}</div></details>` : ''}
     <label class="cert-name"><b>İsim</b><input class="ex-input" maxlength="30" value="${escHtml(certName())}" onchange="settings.childName=this.value.trim()||'Hümanur';saveSettings();renderCert()"></label>
     ${certSel ? `<div class="cert-wrap" id="certImg"><canvas id="certCanvas" width="1200" height="850"></canvas></div>
       <div class="ex-row ex-nav"><button class="ex-learn" type="button" onclick="downloadCert()">📥 İndir</button><button class="voice-btn ghost" type="button" onclick="printCert()">🖨️ Yazdır</button></div>`

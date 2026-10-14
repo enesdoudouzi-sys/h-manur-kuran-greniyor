@@ -60,6 +60,9 @@ function initShell(){
       <div class="sum-lale"><span class="sum-lale-ic">🌷</span><span class="sum-lale-text"></span></div>
     </div>
     <div id="homeDaily"></div>
+    <div class="home-search"><span>🔍</span><input id="homeSearch" type="search" placeholder="Ara: harf, dua, ezan, oyun…" autocomplete="off" oninput="filterTiles(this.value)" aria-label="Bölüm ara"></div>
+    <div id="homeRecent"></div>
+    <p class="home-none gone" id="homeNone">Bulunamadı. Başka bir kelime dene. 🌷</p>
     ${GROUPS.map(g=> `<section class="group"><h3 class="group-title">${g.title}</h3><div class="tile-grid">
       ${g.items.map(([st, label])=>{
         const n = nodeOf(st);
@@ -91,7 +94,49 @@ function initShell(){
   map.querySelectorAll('.map-heading, .path-line').forEach(e=> e.remove());
   document.querySelectorAll('.panel .back-btn').forEach(b=>{ b.innerHTML = '<span class="back-ico">‹</span> Ana sayfa'; });
 
+  const _open = openStage;
+  openStage = function(stage){ noteRecent(stage); _open(stage); };
+  const _close = closeStage;
+  closeStage = function(){ _close(); renderRecent(); };
   refreshShell();
+}
+
+// Search: matches the tile name and the section's own title and description.
+const trLow = t=> String(t).toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ı/g, 'i');
+function filterTiles(q){
+  q = trLow(q.trim());
+  let any = false;
+  document.querySelectorAll('#home .group').forEach(g=>{
+    let n = 0;
+    g.querySelectorAll('.tile').forEach(tile=>{
+      const node = nodeOf(tile.dataset.tile);
+      const hay = trLow(tile.textContent + ' ' + (node ? node.querySelector('.stage-body').textContent : ''));
+      const hit = !q || hay.includes(q);
+      tile.classList.toggle('gone', !hit);
+      if(hit) n++;
+    });
+    g.classList.toggle('gone', !n);
+    if(n) any = true;
+  });
+  $id('homeNone').classList.toggle('gone', any);
+  const rec = $id('homeRecent'); if(rec) rec.classList.toggle('gone', !!q);
+}
+// "Son açtıkların": the last four sections opened.
+const RECENT_KEY = 'humanur-recent';
+let recent = [];
+try{ recent = JSON.parse(localStorage.getItem(RECENT_KEY)) || []; }catch(e){}
+function noteRecent(stage){
+  const tile = document.querySelector('#home .tile[data-tile="'+stage+'"]');
+  if(!tile || tile.classList.contains('locked')) return;
+  recent = [stage].concat(recent.filter(x=> x !== stage)).slice(0, 4);
+  try{ localStorage.setItem(RECENT_KEY, JSON.stringify(recent)); }catch(e){}
+}
+function renderRecent(){
+  const el = $id('homeRecent');
+  if(!el) return;
+  const items = recent.map(st=> document.querySelector('#home .tile[data-tile="'+st+'"]')).filter(Boolean);
+  el.innerHTML = items.length ? `<div class="recent-title">Son açtıkların</div><div class="recent-row">${items.map(t=>
+    `<button type="button" class="recent-chip" onclick="openStage('${t.dataset.tile}')">${t.querySelector('.tile-ic').innerHTML}<span>${t.querySelector('.tile-name').textContent}</span></button>`).join('')}</div>` : '';
 }
 
 function refreshShell(){
@@ -108,6 +153,9 @@ function refreshShell(){
   const gun = document.querySelector('#home .tile[data-tile="gun"] .tile-sub');
   if(gun && typeof DK !== 'undefined'){ const d = state.days[DK]; gun.textContent = '🍽️ ' + (d ? d.s.filter(Boolean).length : 0) + '/5'; }
   if(typeof refreshFun === 'function') refreshFun();
+  const greet = document.querySelector('#home .sum-greet');
+  if(greet && typeof settings !== 'undefined') greet.textContent = 'Selâmün aleyküm, '+(settings.childName || 'Hümanur')+'! 🌙';
+  renderRecent();
 }
 
 // Keep the shell in sync with every progress update

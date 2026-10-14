@@ -1129,6 +1129,7 @@ async function init(){
   if(typeof initGames === 'function') initGames();
   if(typeof initIman === 'function') initIman();
   if(typeof initIlahi === 'function') initIlahi();
+  if(typeof initReader === 'function') initReader();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');
