@@ -42,6 +42,57 @@ NAMAZ_DUA.forEach(d=> DUA.push(Object.assign(d, {
 const rbn = DUA.find(d=> d.id === 'rabbena');
 if(rbn) rbn.namaz = true;
 
+// Duas that are Qur'an verses can be heard from the Kâbe / Medine imams (everyayah).
+// full:false → the dua is part of a longer verse; the whole verse is played.
+const DUA_QURAN = {
+  besmele:{ayat:[[1,1]], full:true},
+  rabbena:{ayat:[[2,201]], full:false},
+  rabbenagfirli:{ayat:[[14,41]], full:true},
+  rabbicalni:{ayat:[[14,40]], full:true},
+  latuzig:{ayat:[[3,8]], full:true},
+  anne:{ayat:[[17,24]], full:false},
+  ilim:{ayat:[[20,114]], full:false},
+  yolculuk:{ayat:[[43,13],[43,14]], full:false}
+};
+DUA.push(
+  {id:'rabbicalni', t:'Rabbi\'c\'alnî', w:'Namazdan sonra', namaz:true, ar:'رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ', ok:'Rabbic\'alnî mukîmes-salâti ve min zürriyyetî, rabbenâ ve tekabbel duâ', m:'Rabbim! Beni ve çocuklarımı namazı devamlı kılanlardan eyle. Rabbimiz, duamı kabul et.'},
+  {id:'latuzig', t:'Rabbenâ Lâ Tüziğ', w:'Kalbimiz doğru yolda kalsın diye', ar:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ', ok:'Rabbenâ lâ tüziğ kulûbenâ ba\'de iz hedeytenâ ve heb lenâ min ledünke rahmeh, inneke entel-vehhâb', m:'Rabbimiz! Bizi doğru yola ilettikten sonra kalplerimizi kaydırma, bize katından rahmet ver. Şüphesiz sen çok bağışlayansın.'}
+);
+const DQ_NAMES = {1:'Fâtiha', 2:'Bakara', 3:'Âl-i İmrân', 14:'İbrâhîm', 17:'İsrâ', 20:'Tâhâ', 43:'Zuhruf'};
+const quranRef = q=> DQ_NAMES[q.ayat[0][0]]+' Sûresi, '+q.ayat.map(x=> x[1]).join('-')+'. âyet';
+function playDuaQuran(id){
+  const q = DUA_QURAN[id];
+  stopDuaPlay();
+  const token = {id, line:-1};
+  duaPlay = token;
+  const btn = document.querySelector('.dua-imam .play-btn');
+  if(btn) btn.classList.add('playing');
+  let k = 0, retried = false;
+  const audio = new Audio();
+  currentAudio = audio;
+  const done = ()=>{ if(btn) btn.classList.remove('playing'); if(duaPlay === token) duaPlay = null; if(currentAudio === audio) currentAudio = null; };
+  const play = who=>{
+    audio.src = recitationUrl(q.ayat[k][0], q.ayat[k][1], who);
+    const p = audio.play(); if(p && p.catch) p.catch(fail);
+  };
+  const fail = ()=>{
+    if(duaPlay !== token) return;
+    if(!retried && reciter !== 0){ retried = true; showToast('Bu kâri yüklenemedi, Mishary Alafasy okuyor.'); play(0); return; }
+    showToast('Ses yüklenemedi. İnternet bağlantını kontrol et.'); done();
+  };
+  audio.onerror = fail;
+  audio.onended = ()=>{ if(duaPlay !== token) return; k++; if(k < q.ayat.length) play(retried ? 0 : undefined); else done(); };
+  play();
+}
+function duaImamBox(d){
+  const q = DUA_QURAN[d.id];
+  if(!q) return `<div class="ex-sub dua-noimam">🕋 Bu dua bir Kur'an âyeti olmadığı için Kâbe imamlarının kaydı bulunmuyor. Hocanın sesini aşağıdan kaydedebilirsin.</div>`;
+  return `<div class="ex-card dua-imam"><div class="ex-label">🕋 Kâbe ve Medine imamlarından dinle</div>
+    <div class="chips reciter-chips">${reciterChips()}</div>
+    <div class="ex-row"><button class="play-btn" type="button" onclick="duaPlay && duaPlay.line === -1 ? stopDuaPlay() : playDuaQuran('${d.id}')" aria-label="İmamdan dinle">▶</button>
+      <div class="ex-grow"><b>${quranRef(q)}</b><div class="ex-sub">${q.full ? 'Bu dua Kur\'an\'daki âyetin kendisidir.' : 'Dua bu âyetin içinde geçer; âyetin tamamı okunur.'}</div></div></div></div>`;
+}
+
 let duaPlay = null; // {id, line}
 function stopDuaPlay(){
   duaPlay = null;
@@ -50,6 +101,7 @@ function stopDuaPlay(){
   document.querySelectorAll('.dua-line.speaking').forEach(e=> e.classList.remove('speaking'));
   const b = document.querySelector('.dua-player .dp-play');
   if(b) b.textContent = '▶';
+  document.querySelectorAll('.dua-imam .play-btn.playing').forEach(e=> e.classList.remove('playing'));
 }
 function speakLine(text, done){
   if(!('speechSynthesis' in window)){ done(); return; }
@@ -108,16 +160,19 @@ function duaItem(d){
     ? `<div class="ex-item-body"><div class="dua-player"><button type="button" class="dp-play" onclick="playDua('${d.id}')" aria-label="Hepsini dinle">▶</button>
         <span class="dp-title">${d.t}</span><span class="ex-sub">${d.lines.length} satır · satıra dokun, dinle</span></div>
         ${d.lines.map((l, k)=> `<button type="button" class="dua-line" onclick="sayLine('${d.id}',${k})"><span class="arabic">${l[0]}</span><span class="dl-ok">${l[1]}</span><span class="dl-m">${l[2]}</span></button>`).join('')}
+        ${duaImamBox(d)}
         <div class="ex-row">${exBtn(key, 'Ezberledim')}</div>${typeof voiceBox === 'function' ? voiceBox(key) : ''}</div>`
     : `<div class="ex-item-body"><div class="arabic ex-ar-lg">${d.ar}</div><div class="ex-okunus">${d.ok}</div>
         <div class="ex-mean"><b>Anlamı</b><p>${d.m}</p></div><div class="ex-row">${exSpeak(d.ar)}${exBtn(key, 'Ezberledim')}</div>
+        ${duaImamBox(d)}
         ${typeof voiceBox === 'function' ? voiceBox(key) : ''}</div>`;
   return `<div class="ex-item ${open ? 'open' : ''} ${state.extra[key] ? 'learned' : ''}" id="dua-${d.id}">
     <button class="ex-item-head" type="button" onclick="stopDuaPlay(); exUI.dua = exUI.dua==='${d.id}' ? null : '${d.id}'; renderExtra('dua')">
-      <span class="ex-num">${state.extra[key] ? '✓' : d.namaz ? '🕌' : '🤲'}</span><span class="ex-grow"><b>${d.t}</b><span class="ex-sub">${d.w}</span></span><span class="chevron">▸</span></button>${body}</div>`;
+      <span class="ex-num">${state.extra[key] ? '✓' : d.namaz ? '🕌' : '🤲'}</span><span class="ex-grow"><b>${d.t}</b><span class="ex-sub">${d.w}${typeof DUA_QURAN !== 'undefined' && DUA_QURAN[d.id] ? ' · 🕋 imam sesi' : ''}</span></span><span class="chevron">▸</span></button>${body}</div>`;
 }
 vDua = function(){
-  const nm = DUA.filter(d=> d.namaz), day = DUA.filter(d=> !d.namaz);
+  const ORDER = ['subhaneke','tehiyyat','salli','barik','rabbena','rabbenagfirli','rabbicalni','kunut1','kunut2'];
+  const nm = DUA.filter(d=> d.namaz).sort((x, y)=> ORDER.indexOf(x.id) - ORDER.indexOf(y.id)), day = DUA.filter(d=> !d.namaz);
   return `<h3 class="sub-title">🕌 Namaz duaları</h3>${nm.map(duaItem).join('')}
     <h3 class="sub-title">🤲 Günlük dualar</h3>${day.map(duaItem).join('')}`;
 };
