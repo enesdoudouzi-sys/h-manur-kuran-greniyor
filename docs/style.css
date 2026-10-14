@@ -1138,3 +1138,23 @@
   .il-form label{ display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
   .il-form textarea{ resize:vertical; font-family:inherit; }
   .il-add{ margin:6px 0 10px; }
+
+  /* ===== reader.js + home search ===== */
+  .rd-bar{ display:flex; gap:8px; align-items:center; margin:6px 0 10px; }
+  .rd-btn{ border:none; border-radius:999px; padding:6px 16px; background:var(--teal); color:#fff; font-family:'Baloo 2'; font-weight:700; font-size:.95rem; cursor:pointer; }
+  .rd-slow{ border:2px solid var(--sand-deep); border-radius:999px; padding:3px 10px; background:var(--card); cursor:pointer; font-size:1rem; opacity:.6; }
+  .rd-slow.on{ opacity:1; border-color:var(--gold); background:#FFF1D2; }
+  .story-card .rd-bar{ justify-content:center; }
+  .rd-on{ background:#FFE9A8; border-radius:6px; box-shadow:0 0 0 3px #FFE9A8; transition:background .2s; }
+  body.dark .rd-on{ background:#5A4A1A; box-shadow:0 0 0 3px #5A4A1A; }
+  .il-story-wrap .rd-bar{ margin-top:0; }
+  .home-search{ display:flex; align-items:center; gap:8px; background:var(--card); border-radius:16px; padding:4px 14px; margin:12px 0 6px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .home-search input{ flex:1; border:none; background:transparent; font:inherit; font-size:1rem; padding:8px 0; color:var(--ink); outline:none; }
+  .recent-title{ font-weight:800; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin:10px 2px 6px; }
+  .recent-row{ display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; }
+  .recent-chip{ display:flex; align-items:center; gap:6px; flex:none; border:none; background:var(--card); border-radius:999px; padding:6px 12px 6px 8px; box-shadow:0 1px 4px rgba(0,0,0,.08); font-family:'Baloo 2'; font-weight:700; color:var(--ink); cursor:pointer; }
+  .recent-chip svg, .recent-chip img{ width:22px; height:22px; }
+  .home-none{ text-align:center; color:var(--ink-soft); margin:16px 0; }
+  .cert-more{ margin:8px 0 4px; }
+  .cert-more summary{ cursor:pointer; font-weight:700; color:var(--ink-soft); padding:6px 2px; }
+  .story-card:not(.open) .rd-bar{ display:none; }
