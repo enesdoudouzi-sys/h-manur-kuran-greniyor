@@ -7,7 +7,7 @@ const GROUPS = [
   {title:'Öğren',  items:[['letters','Elifbe'],['syllables','Hece'],['lessons','Okuma'],['oyunlar','Oyunlar'],['sohbet','Lale\'ye sor']]},
   {title:'Kur\'an', items:[['suras','Sûreler'],['dua','Dualar'],['pages','Sayfalar'],['tecvid','Tecvid'],['kuran','Mushaf']]},
   {title:'İman',   items:[['iman','İman ve İslam'],['peygamber','Peygamberler'],['ibadet','Namaz'],['ezan','Ezan'],['ramazan','Ramazan'],['esma','Esmâ']]},
-  {title:'Keşfet', items:[['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['zikir','Zikirmatik'],['vakit','Vakit ve Kıble'],['gun','Bugün']]},
+  {title:'Keşfet', items:[['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['ilahi','İlahiler'],['zikir','Zikirmatik'],['vakit','Vakit ve Kıble'],['gun','Bugün']]},
   {title:'Ben',    items:[['sandik','Sandık'],['album','Albüm'],['belge','Belgeler'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
 ];
 const NO_BAR = ['gun','veli','ayarlar','sohbet','belge','zikir','kuran','vakit'];
@@ -30,6 +30,7 @@ function stageRatio(stage){
     if(typeof TECVID !== 'undefined') r.tecvid = exCount('t')/TECVID.length;
     if(typeof PEYGAMBER !== 'undefined') Object.assign(r, {iman: exCount('f')/(IMAN.length+ISLAM.length+2), peygamber: exCount('y')/PEYGAMBER.length,
       ezan: exCount('x')/3, ramazan: exCount('r')/3, album: stickersGot()/STICKERS.length});
+    if(typeof ILAHI !== 'undefined') r.ilahi = exCount('u')/ILAHI.length;
     if(typeof MEM_STAGES !== 'undefined') r.oyunlar = (exCount('o')+exCount('c'))/(MEM_STAGES.length+LETTERS.length);
   }
   if(stage === 'stories') return storiesUnlocked > 0 ? storiesUnlocked/STORIES.length : 0;
