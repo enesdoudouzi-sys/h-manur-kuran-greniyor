@@ -40,6 +40,7 @@ function playSfx(kind){
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
     if(audioCtx.state === 'suspended') audioCtx.resume();
     if(kind === 'good'){ tone(784, 0, .16, 'sine', .18); tone(1175, .1, .26, 'sine', .16); }
+    else if(kind === 'tap'){ tone(660, 0, .07, 'sine', .08); }
     else if(kind === 'win'){ [523, 659, 784, 1047].forEach((f, i)=> tone(f, i*.11, .3, 'sine', .16)); }
     else{ tone(220, 0, .22, 'triangle', .12); }
   }catch(e){}

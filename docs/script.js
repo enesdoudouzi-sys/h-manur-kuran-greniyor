@@ -1126,6 +1126,7 @@ async function init(){
   if(typeof initElifbePlus === 'function') initElifbePlus();
   if(typeof initChat === 'function') initChat();
   if(typeof initMore === 'function') initMore();
+  if(typeof initGames === 'function') initGames();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');
