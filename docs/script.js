@@ -1127,6 +1127,7 @@ async function init(){
   if(typeof initChat === 'function') initChat();
   if(typeof initMore === 'function') initMore();
   if(typeof initGames === 'function') initGames();
+  if(typeof initIman === 'function') initIman();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
   document.getElementById('appRoot').classList.add('ready');

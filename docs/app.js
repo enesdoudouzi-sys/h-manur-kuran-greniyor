@@ -6,10 +6,11 @@
 const GROUPS = [
   {title:'Öğren',  items:[['letters','Elifbe'],['syllables','Hece'],['lessons','Okuma'],['oyunlar','Oyunlar'],['sohbet','Lale\'ye sor']]},
   {title:'Kur\'an', items:[['suras','Sûreler'],['dua','Dualar'],['pages','Sayfalar'],['tecvid','Tecvid'],['kuran','Mushaf']]},
-  {title:'Keşfet', items:[['ibadet','Namaz'],['esma','Esmâ'],['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['zikir','Zikirmatik'],['gun','Bugün']]},
-  {title:'Ben',    items:[['sandik','Sandık'],['belge','Belgeler'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
+  {title:'İman',   items:[['iman','İman ve İslam'],['peygamber','Peygamberler'],['ibadet','Namaz'],['ezan','Ezan'],['ramazan','Ramazan'],['esma','Esmâ']]},
+  {title:'Keşfet', items:[['kissa','Kıssalar'],['hazine','Bilgi'],['stories','Hikâyeler'],['zikir','Zikirmatik'],['vakit','Vakit ve Kıble'],['gun','Bugün']]},
+  {title:'Ben',    items:[['sandik','Sandık'],['album','Albüm'],['belge','Belgeler'],['veli','Ebeveyn'],['ayarlar','Ayarlar']]}
 ];
-const NO_BAR = ['gun','veli','ayarlar','sohbet','belge','zikir','kuran'];
+const NO_BAR = ['gun','veli','ayarlar','sohbet','belge','zikir','kuran','vakit'];
 
 const $id = id=> document.getElementById(id);
 const nodeOf = stage=> document.querySelector('#mapView > .stage-node[data-stage="'+stage+'"]');
@@ -27,6 +28,8 @@ function stageRatio(stage){
       hazine: (exCount('m')+exCount('g')+exCount('p'))/(ALIM.length+GOK.length+PAD.length)
     });
     if(typeof TECVID !== 'undefined') r.tecvid = exCount('t')/TECVID.length;
+    if(typeof PEYGAMBER !== 'undefined') Object.assign(r, {iman: exCount('f')/(IMAN.length+ISLAM.length+2), peygamber: exCount('y')/PEYGAMBER.length,
+      ezan: exCount('x')/3, ramazan: exCount('r')/3, album: stickersGot()/STICKERS.length});
     if(typeof MEM_STAGES !== 'undefined') r.oyunlar = (exCount('o')+exCount('c'))/(MEM_STAGES.length+LETTERS.length);
   }
   if(stage === 'stories') return storiesUnlocked > 0 ? storiesUnlocked/STORIES.length : 0;
