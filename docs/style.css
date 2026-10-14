@@ -1011,3 +1011,47 @@
     body.print-cert #certPrint{ display:block !important; width:100%; height:auto; }
     @page{ size:landscape; margin:8mm; }
   }
+
+  /* ===== games.js: namaz duaları, oyunlar, zikirmatik, mushaf ===== */
+  .dua-player{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:linear-gradient(135deg, #0F5C56, #2A9D8F); color:#fff; border-radius:16px; padding:10px 12px; margin-bottom:10px; }
+  .dua-player .ex-sub{ color:#D8F1EA; width:100%; }
+  .dp-play{ width:48px; height:48px; border-radius:50%; border:none; background:#fff; color:var(--teal); font-size:1.3rem; cursor:pointer; flex:none; }
+  .dp-title{ font-family:'Lalezar'; font-size:1.25rem; }
+  .dua-line{ display:flex; flex-direction:column; gap:4px; width:100%; text-align:left; border:2px solid transparent; background:var(--card); border-radius:16px; padding:10px 12px; margin:0 0 8px; box-shadow:0 1px 4px rgba(0,0,0,.08); cursor:pointer; font-family:'Baloo 2'; color:var(--ink); }
+  .dua-line .arabic{ direction:rtl; text-align:right; font-size:1.7rem; line-height:1.9; color:var(--ink); }
+  .dl-ok{ font-weight:700; color:var(--teal); font-size:.95rem; }
+  .dl-m{ font-style:italic; color:#2A7F9E; font-size:.9rem; }
+  .dua-line.speaking{ border-color:var(--gold); background:#FFF7E3; }
+  body.dark .dua-line.speaking{ background:#3A3320; }
+  .game-card{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; border:none; background:var(--card); border-radius:18px; padding:14px; margin-bottom:10px; box-shadow:0 2px 8px rgba(0,0,0,.08); cursor:pointer; font-family:'Baloo 2'; color:var(--ink); }
+  .game-card b{ display:block; font-size:1.1rem; }
+  .gc-ic{ font-size:2rem; width:52px; height:52px; display:grid; place-items:center; background:var(--sand-deep); border-radius:14px; flex:none; }
+  .game-back{ margin-bottom:10px; }
+  .mem-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:8px; }
+  .mem-head b{ font-family:'Lalezar'; font-size:1.4rem; color:var(--teal); }
+  .mem-head span{ color:var(--gold); font-weight:700; }
+  .mem-stages{ display:flex; gap:6px; justify-content:center; margin-bottom:12px; }
+  .mem-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+  .mem-card{ position:relative; aspect-ratio:1/0.82; border:none; border-radius:16px; cursor:pointer; background:var(--gold); color:#fff; box-shadow:0 4px 0 #A57A26; font-size:2rem; transition:transform .25s; }
+  .mem-card .mem-front{ display:none; font-size:2.6rem; color:var(--teal); }
+  .mem-card.up, .mem-card.ok{ background:var(--card); box-shadow:0 4px 0 var(--sand-deep); transform:rotateY(360deg); }
+  .mem-card.up .mem-front, .mem-card.ok .mem-front{ display:inline; }
+  .mem-card.up .mem-back, .mem-card.ok .mem-back{ display:none; }
+  .mem-card.ok{ background:#E3F4EE; box-shadow:0 0 0 3px var(--teal-light); }
+  .paint-wrap{ background:#fff; border-radius:20px; border:2px solid var(--sand-deep); overflow:hidden; }
+  .paint-wrap canvas{ display:block; width:100%; height:auto; touch-action:none; }
+  .paint-colors{ display:grid; grid-template-columns:repeat(6, 1fr); gap:10px; margin:14px 0; }
+  .paint-c{ aspect-ratio:1; border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 1px #ccc; cursor:pointer; }
+  .paint-c.on{ box-shadow:0 0 0 3px var(--ink); transform:scale(1.08); }
+  .paint-btns{ justify-content:center; }
+  .paint-btns > *{ flex:1; }
+  .zk-list{ justify-content:center; margin-bottom:10px; }
+  .zk-ar{ font-size:2.2rem; color:var(--teal); line-height:1.8; }
+  .zk-btn{ position:relative; display:block; margin:16px auto; width:230px; height:230px; border:none; border-radius:50%; background:radial-gradient(circle at 35% 30%, #3BB3A3, #0F5C56); color:#fff; cursor:pointer; box-shadow:0 8px 0 #0A3F3B, 0 12px 24px rgba(0,0,0,.2); -webkit-tap-highlight-color:transparent; }
+  .zk-btn:active{ transform:translateY(5px); box-shadow:0 3px 0 #0A3F3B; }
+  .zk-btn svg{ position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
+  .zk-track{ fill:none; stroke:rgba(255,255,255,.18); stroke-width:10; }
+  .zk-ring{ fill:none; stroke:var(--gold-light); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset .2s; }
+  .zk-n{ position:relative; display:block; font-family:'Lalezar'; font-size:4rem; line-height:1; }
+  .zk-t{ position:relative; display:block; font-weight:700; opacity:.85; }
+  .kuran-link{ display:inline-block; text-decoration:none; margin:8px 0; }
