@@ -165,6 +165,7 @@ function importProgress(input){
 }
 // Union of both progress states: earned stars are never lost.
 function mergeProgress(saved){
+  saved = cleanProgress(saved);
   Object.keys(state).forEach(k=>{
     const src = saved[k];
     if(!src || typeof src !== 'object') return;

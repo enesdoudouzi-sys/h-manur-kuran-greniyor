@@ -216,7 +216,12 @@ function vEzan(){
   let body;
   if(ez.tab === 'ezan'){
     body = `<p class="tab-hint">Ezan, Müslümanları namaza çağırır. Günde beş kez okunur. Ezanı duyunca susar, dinler ve cümleleri içimizden tekrar ederiz.</p>
-      ${linesHtml('ezan', 'Ezan', EZAN)}<div class="ex-row">${ivBtn('x:ezan', 'ezan', 'Ezanı öğrendim')}</div>`;
+      ${linesHtml('ezan', 'Ezan', EZAN)}
+      <div class="ex-card ezan-listen"><div class="ex-label">🕋 Kâbe'den ezan dinle</div>
+        <p class="ex-sub">Mescid-i Haram'da ezanı imamlar değil, müezzinler okur (örneğin Şeyh Ali Mulla). Güvenilir bir kaydı bir büyüğünle birlikte aç, istersen aşağıya kaydedip uygulamaya ekle.</p>
+        <div class="ex-row"><a class="voice-btn" href="https://www.youtube.com/results?search_query=${encodeURIComponent('Mekke ezanı Kabe Ali Mulla')}" target="_blank" rel="noopener">▶ YouTube'da Kâbe ezanı</a></div>
+        ${typeof voiceBox === 'function' ? voiceBox('x:ezan-ses') : ''}</div>
+      <div class="ex-row">${ivBtn('x:ezan', 'ezan', 'Ezanı öğrendim')}</div>`;
   }else if(ez.tab === 'dua'){
     body = `<p class="tab-hint">Ezan bitince önce salavat getirilir, sonra bu dua okunur.</p>
       ${linesHtml('ezandua', 'Ezan duası', EZAN_DUA)}<div class="ex-row">${ivBtn('x:dua', 'ezan', 'Ezberledim')}</div>`;
@@ -308,7 +313,26 @@ function ramToggle(y, d){
 /* ============ Namaz vakitleri + Kıble ============ */
 const VK_KEY = 'humanur-vakit';
 let vk = {city:'', lat:null, lon:null, label:'', data:null, date:'', err:''};
-try{ Object.assign(vk, JSON.parse(localStorage.getItem(VK_KEY)) || {}); }catch(e){}
+// Only HH:MM values from the prayer-time service ever reach the page.
+function cleanTimes(t){
+  if(!t || typeof t !== 'object') return null;
+  const out = {};
+  for(const k of ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha']){
+    const m = /^(\d{1,2}):(\d{2})/.exec(String(t[k] || ''));
+    if(!m) return null;
+    out[k] = m[1].padStart(2, '0')+':'+m[2];
+  }
+  return out;
+}
+try{
+  const saved = JSON.parse(localStorage.getItem(VK_KEY)) || {};
+  vk.city = String(saved.city || '').slice(0, 80);
+  vk.label = String(saved.label || '').slice(0, 80);
+  vk.lat = Number.isFinite(saved.lat) ? saved.lat : null;
+  vk.lon = Number.isFinite(saved.lon) ? saved.lon : null;
+  vk.data = cleanTimes(saved.data);
+  vk.date = String(saved.date || '').slice(0, 12);
+}catch(e){}
 function vkSave(){ try{ localStorage.setItem(VK_KEY, JSON.stringify(Object.assign({}, vk, {err:''}))); }catch(e){} }
 const VK_NAMES = [['Fajr','İmsak','🌌'],['Sunrise','Güneş','🌅'],['Dhuhr','Öğle','☀️'],['Asr','İkindi','🌤️'],['Maghrib','Akşam','🌇'],['Isha','Yatsı','🌙']];
 const KAABA = [21.4225, 39.8262];
@@ -327,8 +351,12 @@ async function vkFetch(){
     const r = await fetch(url);
     const j = await r.json();
     if(!r.ok || !j.data) throw new Error('bad');
-    vk.data = j.data.timings; vk.date = DK;
-    if(vk.lat === null && j.data.meta){ vk.lat = +j.data.meta.latitude; vk.lon = +j.data.meta.longitude; vk.geo = false; }
+    vk.data = cleanTimes(j.data.timings); vk.date = DK;
+    if(!vk.data) throw new Error('bad');
+    if(vk.lat === null && j.data.meta){
+      const lat = Number(j.data.meta.latitude), lon = Number(j.data.meta.longitude);
+      if(Math.abs(lat) <= 90 && Math.abs(lon) <= 180){ vk.lat = lat; vk.lon = lon; }
+    }
   }catch(e){ vk.err = 'Vakitler alınamadı. İnternet bağlantısını ve şehir adını kontrol et.'; }
   vkSave();
   renderIman('vakit');

@@ -67,6 +67,13 @@ export default {
     if(request.method !== "POST") return json({error:"method_not_allowed"}, 405, cors);
     if(cors["Access-Control-Allow-Origin"] !== origin) return json({error:"forbidden_origin"}, 403, cors);
     if(!env.ANTHROPIC_API_KEY) return json({error:"not_configured"}, 500, cors);
+    // The Origin header only stops browsers; scripts can fake it. These limits
+    // keep strangers from running up the API bill.
+    if(Number(request.headers.get("Content-Length") || 0) > 20000) return json({error:"too_large"}, 413, cors);
+    if(env.LIMITER){
+      const {success} = await env.LIMITER.limit({key: request.headers.get("CF-Connecting-IP") || "unknown"});
+      if(!success) return json({error:"busy"}, 429, cors);
+    }
 
     let body;
     try{ body = await request.json(); }catch(e){ return json({error:"bad_json"}, 400, cors); }
