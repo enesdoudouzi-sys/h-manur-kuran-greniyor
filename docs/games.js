@@ -333,7 +333,17 @@ const ZIKIR = [
 ];
 const ZK_KEY = 'humanur-zikir';
 let zk = {sel:'subhan', target:33, n:0, day:{}};
-try{ Object.assign(zk, JSON.parse(localStorage.getItem(ZK_KEY)) || {}); }catch(e){}
+try{
+  const saved = JSON.parse(localStorage.getItem(ZK_KEY)) || {};
+  if(ZIKIR.some(x=> x[0] === saved.sel)) zk.sel = saved.sel;
+  if([0, 33, 99, 100].includes(saved.target)) zk.target = saved.target;
+  zk.n = Math.max(0, Math.floor(Number(saved.n)) || 0);
+  if(saved.day && typeof saved.day === 'object') Object.keys(saved.day).forEach(d=>{
+    if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(d) || !saved.day[d] || typeof saved.day[d] !== 'object') return;
+    zk.day[d] = {};
+    ZIKIR.forEach(([id])=>{ const c = Math.floor(Number(saved.day[d][id])); if(c > 0) zk.day[d][id] = c; });
+  });
+}catch(e){}
 function zkSave(){ try{ localStorage.setItem(ZK_KEY, JSON.stringify(zk)); }catch(e){} }
 function zkToday(){ const d = zk.day[DK] || {}; return Object.values(d).reduce((a, b)=> a + b, 0); }
 function renderZikir(){

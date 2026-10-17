@@ -1158,3 +1158,23 @@
   .cert-more{ margin:8px 0 4px; }
   .cert-more summary{ cursor:pointer; font-weight:700; color:var(--ink-soft); padding:6px 2px; }
   .story-card:not(.open) .rd-bar{ display:none; }
+
+  /* ===== kilit.js: Ebeveyn şifresi ===== */
+  .pin-modal{ position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:16px; background:rgba(15,59,55,.55); backdrop-filter:blur(3px); }
+  .pin-card{ width:min(340px,100%); background:var(--card); border-radius:24px; padding:22px 20px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,.25); }
+  .pin-card h3{ margin:4px 0 4px; font-family:'Lalezar'; font-size:1.5rem; color:var(--teal); }
+  .pin-lock{ font-size:2rem; }
+  .pin-dots{ display:flex; justify-content:center; gap:14px; margin:16px 0 6px; }
+  .pin-dots i{ width:16px; height:16px; border-radius:50%; border:2px solid var(--teal); }
+  .pin-dots i.on{ background:var(--teal); }
+  .pin-err{ min-height:1.2em; margin:4px 0; color:var(--coral); font-weight:700; font-size:.9rem; }
+  .pin-pad{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:8px; }
+  .pin-pad button{ height:58px; border:none; border-radius:16px; background:var(--sand-deep); color:var(--ink); font:700 1.4rem 'Baloo 2'; cursor:pointer; }
+  .pin-pad button:active{ transform:scale(.95); }
+  .pin-pad button:disabled{ opacity:.4; }
+  .pin-forgot{ margin-top:12px; border:none; background:none; color:var(--ink-soft); text-decoration:underline; font:600 .85rem 'Baloo 2'; cursor:pointer; }
+  .pin-q{ display:flex; flex-direction:column; gap:8px; margin-top:14px; font-size:1.3rem; }
+  .pin-actions{ justify-content:center; margin-top:8px; }
+  .pin-settings{ margin-top:14px; }
+  .ezan-listen{ margin-top:12px; }
+  .ezan-listen a{ text-decoration:none; }

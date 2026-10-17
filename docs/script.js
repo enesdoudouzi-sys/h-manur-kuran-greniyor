@@ -244,11 +244,38 @@ const localStore = (()=>{
 const hasStorage = hostedStorage || !!localStore;
 let saveTimer = null;
 
-function applySaved(saved){
-  if(!saved) return;
+// Saved or imported progress is untrusted: keep only the shapes the app itself
+// writes, so a crafted file cannot smuggle markup into the page.
+const SAFE_KEY = /^[\p{L}\p{M}\p{N}:._-]{1,60}$/u;
+function cleanProgress(saved){
+  const out = {};
+  if(!saved || typeof saved !== 'object') return out;
   Object.keys(state).forEach(k=>{
-    if(saved[k] && typeof saved[k] === 'object') Object.assign(state[k], saved[k]);
+    const src = saved[k];
+    if(!src || typeof src !== 'object' || Array.isArray(src)) return;
+    const dst = out[k] = {};
+    Object.keys(src).forEach(id=>{
+      if(!SAFE_KEY.test(id)) return;
+      const v = src[id];
+      if(k === 'days'){
+        if(!v || typeof v !== 'object') return;
+        const n = Math.floor(Number(v.n));
+        const d = {s: [0, 1, 2, 3, 4].map(i=> Array.isArray(v.s) && v.s[i] ? 1 : 0), n: n > 0 ? Math.min(n, 100000) : 0};
+        if(v.daily) d.daily = 1;
+        if(v.bonus) d.bonus = 1;
+        dst[id] = d;
+      }else if(k === 'mistakes'){
+        const c = Math.floor(Number(v));
+        if(c > 0) dst[id] = Math.min(c, 9);
+      }else if(v === true) dst[id] = true;
+      else if(v === 1 || v === 2) dst[id] = v; // Ramazan: half / full day of fasting
+    });
   });
+  return out;
+}
+function applySaved(saved){
+  const clean = cleanProgress(saved);
+  Object.keys(clean).forEach(k=> Object.assign(state[k], clean[k]));
 }
 
 async function loadProgress(){
@@ -1132,6 +1159,7 @@ async function init(){
   if(typeof initReader === 'function') initReader();
   if(typeof initFun === 'function') initFun();
   if(typeof initShell === 'function') initShell();
+  if(typeof initKilit === 'function') initKilit();
   document.getElementById('appRoot').classList.add('ready');
 }
 // Run after extra.js has loaded and added its content.
